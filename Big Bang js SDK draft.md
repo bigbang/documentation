@@ -36,20 +36,20 @@ Connect to a Big Bang application at *url*.
 Disconnect from the server.
 
 
-### client.getClientId():
+### client.getClientId()
 Your unique identifier for this session. This identifies you to the server and to other users.
 
 Returns `string` clientId
 
 
 ##Subscribe
-### client.on('disconnected', function(reason)):
+### client.on('disconnected', function(reason))
 Fired when the client has been disconnected, either from calling disconnect() or for reasons beyond your control.
 
 
 
 #Channel
-Group together multiple clients in a channel to share information.
+Group together multiple clients in a channel to share information. Channels are publish/subscribe. You can subscribe to a Channel to get any messages that are published to it. You can publish a message to send it to all subscribers.
 ##Basics
 ### client.getChannel(channelName)
 Get a reference to the Channel object for the subscribed channel called *channelName*.
@@ -104,7 +104,7 @@ Fired when a subscriber leaves the channel.
 
 
 #ChannelData
-ChannelData objects are used to store the state of your data.
+ChannelData objects are used to store the state of your data. ChannelData persist as long as the Channel is active and they are automatically synchronized to all subscribers of the channel.
 ##Basics
 ### channel.getNamespaces()
 Get the current *ChannelData* namespace names as an Array.
@@ -162,6 +162,11 @@ Fired when anything happens to key. *value* will be the new value or null in the
 ### channelData.remove(key)
 Remove the value associated with *key*.
 
+
+
+
+
+==============
 Example
 =======
 
@@ -188,24 +193,7 @@ Example
 
 
 
-Channels
-========
 
-Channels are publish/subscribe. You can subscribe to a Channel to get any
-messages that are published to it. You can publish a message to send it to
-all subscribers.
-
-See Client#subscribe() for more!
-
-
-Channel Data
-============
-
-Channels can have key/value pairs called ChannelData associated with them.
-These persist as long as the Channel is active and they are automatically
-synchronized to all subscribers of the channel.
-
-See Channel#getChannelData() for more!
 
 
 API
@@ -224,7 +212,7 @@ Client manages your connection to the server and lets you interface with Channel
 	
 
 
-Events    
+
 BigBang.Channel
 ---------------
 
