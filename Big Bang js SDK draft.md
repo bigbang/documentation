@@ -19,6 +19,12 @@ Servers
 Big Bang hosts your the coordinating server for you. Simply connect your clients and apps to your Big Bang URL. You can use `http://demo.bigbang.io` to try things out. When you are ready, you can create your own application at [https://cloud.bigbang.io/](https://cloud.bigbang.io/).
 
 
+Overview
+========
+
+You will work with three resources when using Big Bang. First, you will need to manage your connection to our servers. Once you have established a connection, you will subscribe to a Channel. All shared information is scoped to a Channel. You can publish and subscribe one-time messages. If you want to give all subscribers a constantly updated state of your data, you can publish and subscribe ChannelData.
+
+
 #Connection
 Connecting your app to Big Bang is easy.
 ##Basics
