@@ -16,7 +16,7 @@ or
 Servers
 =======
 
-To connect to Big Bang you'll need a URL. You can use `http://demo.bigbang.io` to try things out. When you are ready, you can create your own application at [https://cloud.bigbang.io/](https://cloud.bigbang.io/).
+Big Bang hosts your the coordinating server for you. Simply connect your clients and apps to your Big Bang URL. You can use `http://demo.bigbang.io` to try things out. When you are ready, you can create your own application at [https://cloud.bigbang.io/](https://cloud.bigbang.io/).
 
 
 #Connection
