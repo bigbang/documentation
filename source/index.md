@@ -42,11 +42,6 @@ You will work with three resources when using Big Bang. First, you will need to 
 #Connection
 Connecting your app to Big Bang is easy.
 ##Basics
-### client.connect(url, options, function(err))
-Connect to a Big Bang application at *url*.
-
-**Params**
-
 - url `string` HTTP or HTTPS URL to your application.
 - options `object`
 - callback (`Error`)
@@ -69,6 +64,10 @@ client.connect('http://demo.bigbang.io', function(err) {
  ###  ###  ##     ##    ##       ## 
 ```
 
+### client.connect(url, options, function(err))
+Connect to a Big Bang application at *url*.
+
+**Params**
 
 ### client.disconnect()
 Disconnect from the server.
