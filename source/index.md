@@ -37,6 +37,24 @@ Connect to a Big Bang application at *url*.
 - options `object`
 - callback (`Error`)
 
+```javascript
+var client = new BigBang.Client();
+client.connect('http://demo.bigbang.io', function(err) {
+    if (err) return;
+    console.log('Connected as ' + client.getClientId());
+});
+```
+
+```java
+##      ## ##     ## ##    ##  #######  
+##  ##  ## ##     ##  ##  ##  ##     ## 
+##  ##  ## ##     ##   ####         ##  
+##  ##  ## #########    ##        ###   
+##  ##  ## ##     ##    ##       ##     
+##  ##  ## ##     ##    ##              
+ ###  ###  ##     ##    ##       ## 
+```
+
 
 ### client.disconnect()
 Disconnect from the server.
