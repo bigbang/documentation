@@ -38,6 +38,36 @@ html, body {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// TOPNAV
+////////////////////////////////////////////////////////////////////////////////
+nav{
+  position: fixed;
+  width: 100%;
+  top:0;
+  height: $topnav-height;
+  z-index: 31;
+  background: $code-bg;
+  overflow: hidden;
+
+  .logo{
+    img{
+      height: 60px;
+      float: left;
+    }
+    height: 50px;
+    margin-top:10px;
+    color: #FFF;
+    font-size: 30px;
+    font-weight: bold;
+    div{
+      @extend %header-font;
+      padding-top:10px;
+      padding-left: 10px;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -77,8 +107,8 @@ html, body {
   bottom: 0;
   width: $nav-width;
   background-color: $nav-bg;
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 14px;
+  @extend %header-font;
 
   // language selector for mobile devices
   .lang-selector {
@@ -170,7 +200,7 @@ html, body {
     list-style: none;
     margin: 0;
     padding: 0;
-    line-height: 28px;
+    line-height: 38px;
   }
 
   li {
@@ -182,7 +212,7 @@ html, body {
 
   // This is the currently selected ToC entry
   .tocify-focus {
-    @include box-shadow(0px 1px 0px $nav-active-shadow);
+    //@include box-shadow(0px 1px 0px $nav-active-shadow);
     background-color: $nav-active-bg;
     color: $nav-active-text;
   }
@@ -268,6 +298,7 @@ html, body {
 
 .page-wrapper {
   margin-left: $nav-width;
+  margin-top: $topnav-height;
   position: relative;
   z-index: 10;
   background-color: $main-bg;
@@ -305,6 +336,7 @@ html, body {
     float:left;
     color: $lang-select-text;
     text-decoration: none;
+    text-transform: uppercase;
     padding: 0 10px;
     line-height: 30px;
     outline: 0;
