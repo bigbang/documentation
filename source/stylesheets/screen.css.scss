@@ -462,14 +462,18 @@ nav{
     border-bottom: 2px solid $main-bg;
   }
 
-  table {
-    margin-bottom: 1em;
-    overflow: auto;
-    th,td {
-      text-align: left;
-      vertical-align: top;
-      line-height: 1.6;
+    a {
+      color: $nav-active-bg;
     }
+
+    table {
+      margin-bottom: 1em;
+      overflow: auto;
+      th,td {
+        text-align: left;
+        vertical-align: top;
+        line-height: 1.6;
+      }
 
     th {
       padding: 5px 10px;
