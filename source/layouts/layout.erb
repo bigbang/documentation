@@ -55,9 +55,9 @@ under the License.
         <div class="lang-selector">
           <% language_tabs.each do |lang| %>
             <% if lang.is_a? Hash %>
-              <a href="/<%= lang.keys.first %>" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+              <a href="../<%= lang.keys.first %>" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
             <% else %>
-              <a href="/<%= lang %>" data-language-name="<%= lang %>"><%= lang %></a>
+              <a href="../<%= lang %>" data-language-name="<%= lang %>"><%= lang %></a>
             <% end %>
           <% end %>
         </div>
@@ -91,9 +91,9 @@ under the License.
           <div class="lang-selector">
             <% language_tabs.each do |lang| %>
               <% if lang.is_a? Hash %>
-                <a href="/<%= lang.keys.first %>" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+                <a href="../<%= lang.keys.first %>" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
               <% else %>
-                <a href="/<%= lang %>" data-language-name="<%= lang %>"><%= lang %></a>
+                <a href="../<%= lang %>" data-language-name="<%= lang %>"><%= lang %></a>
               <% end %>
             <% end %>
           </div>
