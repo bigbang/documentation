@@ -14,8 +14,8 @@
       showEffectSpeed: 0,
       hideEffectSpeed: 180,
       ignoreSelector: '.toc-ignore',
-      highlightOffset: 60,
-      scrollTo: parseInt($("nav").height()),
+      highlightOffset: parseInt($("nav").height()),
+      scrollTo: parseInt($("nav").height())-1,
       scrollHistory: true,
       hashGenerator: function (text, element) {
         return element.prop('id');
