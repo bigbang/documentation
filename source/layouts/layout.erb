@@ -34,7 +34,9 @@ under the License.
     <% if language_tabs %>
       <script>
         $(function() {
-          localStorage.setItem("language", "<%= current_page.url[1..-2] %>");
+          language = "<%= current_page.url[1..-2] %>"
+          localStorage.setItem("language", language);
+          activateLanguage(language);
         });
       </script>
     <% end %>
@@ -53,9 +55,9 @@ under the License.
         <div class="lang-selector">
           <% language_tabs.each do |lang| %>
             <% if lang.is_a? Hash %>
-              <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+              <a href="/<%= lang.keys.first %>" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
             <% else %>
-              <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
+              <a href="/<%= lang %>" data-language-name="<%= lang %>"><%= lang %></a>
             <% end %>
           <% end %>
         </div>
@@ -89,9 +91,9 @@ under the License.
           <div class="lang-selector">
             <% language_tabs.each do |lang| %>
               <% if lang.is_a? Hash %>
-                <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+                <a href="/<%= lang.keys.first %>" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
               <% else %>
-                <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
+                <a href="/<%= lang %>" data-language-name="<%= lang %>"><%= lang %></a>
               <% end %>
             <% end %>
           </div>

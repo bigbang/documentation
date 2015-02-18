@@ -50,16 +50,4 @@ under the License.
     localStorage.setItem("language", language);
   }
 
-  // if we click on a language tab, activate that language
-  $(function() {
-    $(".lang-selector a").on("click", function() {
-      var language = $(this).data("language-name");
-      pushURL(language);
-      activateLanguage(language);
-      return false;
-    });
-    window.onpopstate = function(event) {
-      activateLanguage(window.location.search.substr(1));
-    };
-  });
 })(window);
