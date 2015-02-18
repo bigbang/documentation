@@ -34,7 +34,7 @@ under the License.
     <% if language_tabs %>
       <script>
         $(function() {
-          setupLanguages(<%= language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>);
+          localStorage.setItem("language", "<%= current_page.url[1..-2] %>");
         });
       </script>
     <% end %>

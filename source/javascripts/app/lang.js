@@ -16,7 +16,6 @@ under the License.
 (function (global) {
   var languages = [];
 
-  global.setupLanguages = setupLanguages;
   global.activateLanguage = activateLanguage;
 
   function activateLanguage(language) {
@@ -49,26 +48,6 @@ under the License.
 
     // save language as next default
     localStorage.setItem("language", language);
-  }
-
-  function setupLanguages(l) {
-    var currentLanguage = l[0];
-    var defaultLanguage = localStorage.getItem("language");
-
-    languages = l;
-
-    if ((location.search.substr(1) !== "") && (jQuery.inArray(location.search.substr(1), languages)) != -1) {
-      // the language is in the URL, so use that language!
-      activateLanguage(location.search.substr(1));
-
-      localStorage.setItem("language", location.search.substr(1));
-    } else if ((defaultLanguage !== null) && (jQuery.inArray(defaultLanguage, languages) != -1)) {
-      // the language was the last selected one saved in localstorage, so use that language!
-      activateLanguage(defaultLanguage);
-    } else {
-      // no language selected, so use the default
-      activateLanguage(languages[0]);
-    }
   }
 
   // if we click on a language tab, activate that language

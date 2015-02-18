@@ -1,0 +1,13 @@
+
+<script>
+  var languages = <%= data.config.language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>
+  var localLanguage = localStorage.getItem("language");
+
+  if ((localLanguage !== null) && (languages.indexOf(localLanguage) != -1)) {
+    // the language was the last selected one saved in localstorage, so use that language!
+    window.location = "/" + localLanguage
+  } else {
+    // no language selected, so use the default
+    window.location = "/" + languages[0]
+  }
+</script>
