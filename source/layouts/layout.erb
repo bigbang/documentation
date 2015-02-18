@@ -13,19 +13,19 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations
 under the License.
 %>
-<% language_tabs = current_page.data.language_tabs %>
+<% language_tabs = data.config.language_tabs %>
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title><%= current_page.data.title || "API Documentation" %></title>
+    <title><%= data.config.title || "API Documentation" %></title>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag :screen, media: :screen %>
     <%= stylesheet_link_tag :print, media: :print %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <% if current_page.data.search %>
+    <% if data.config.search %>
       <%= javascript_include_tag  "all" %>
     <% else %>
       <%= javascript_include_tag  "all_nosearch" %>
@@ -60,7 +60,7 @@ under the License.
           <% end %>
         </div>
       <% end %>
-      <% if current_page.data.search %>
+      <% if data.config.search %>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -68,9 +68,9 @@ under the License.
       <% end %>
       <div id="toc">
       </div>
-      <% if current_page.data.toc_footers %>
+      <% if data.config.toc_footers %>
         <ul class="toc-footer">
-          <% current_page.data.toc_footers.each do |footer| %>
+          <% data.config.toc_footers.each do |footer| %>
             <li><%= footer %></li>
           <% end %>
         </ul>
@@ -80,7 +80,7 @@ under the License.
       <div class="dark-box"></div>
       <div class="content">
         <%= yield %>
-        <% current_page.data.includes && current_page.data.includes.each do |include| %>
+        <% data.config.includes && data.config.includes.each do |include| %>
           <%= partial "includes/#{include}" %>
         <% end %>
       </div>
