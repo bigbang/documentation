@@ -1,4 +1,3 @@
-
 <script>
   var languages = <%= data.config.language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>
   var localLanguage = localStorage.getItem("language");

@@ -1,3 +1,15 @@
+BigBang customizations
+===========
+
+###To edit a language
+
+Edit the corresponding file in /source
+
+###To add a languate
+
+1. Add a .md file in source with the name of the language
+2. Edit data/config.yml with the new language
+
 Slate
 ========
 
