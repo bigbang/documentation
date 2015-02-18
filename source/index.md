@@ -4,10 +4,7 @@ title: Big Bang Client SDK
 language_tabs:
   - java
   - javascript
-
-toc_footers:
-  - <a href='http://getbigbang.com/'>Home page</a>
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - csharp
 
 search: true
 ---
