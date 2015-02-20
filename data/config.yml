@@ -1,8 +1,8 @@
 title: Big Bang Client SDK
 
 language_tabs:
-  - java
   - javascript
+  - java
   - csharp
 
 search: true

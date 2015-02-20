@@ -89,7 +89,6 @@ client.disconnected(new Action<Void>() {
        System.out.println("Client disconnected");
     }
 });
-
 ```
 ### client.disconnected(Action<java.lang.Void> callback)
 
@@ -126,6 +125,7 @@ client.subscribe("example-channel", new Action2<ChannelError, Channel>() {
       }
     }
 });
+```
 ### client.subscribe(java.lang.String channelName, Action2<ChannelError, Channel> callback)
 Subscribe to a  channel called *channelName*. *channel* will be a Channel object.
 
@@ -314,78 +314,3 @@ channelData.remove("myKey");
 ```
 ### channelData.del(java.lang.String key)
 Remove the value associated with *key*.
-
-
-
-
-
-==============
-Example
-=======
-
-  var client = new BigBang.Client();
-  client.connect('http://demo.bigbang.io', function(err) {
-      if (err) return;
-      console.log('Connected as ' + client.getClientId());
-
-      client.subscribe('my-channel', function(err, channel) {
-          if (err) return;
-          channel.on('message', function(message) {
-              console.log(message.senderId + ' said ' + message.payload.getBytesAsJSON().message);
-          });
-          channel.publish({ message : 'Hi everybody!' });
-
-          var channelData = channel.getChannelData();
-          channelData.on('add', function(key, value) {
-              console.log('Someone set ' + key + ' to ' + value);
-          });
-          channelData.put('colors', ['red', 'green', 'blue']);
-      });
-  });
-
-
-
-
-
-
-
-API
-===
-
-BigBang.Client
---------------
-
-Client manages your connection to the server and lets you interface with Channels.
-
-  var client = new BigBang.Client();
-  client.connect('http://demo.bigbang.io', function(err) {
-      if (err) return;
-      console.log('Connected as ' + client.getClientId());
-  });
-
-
-
-
-BigBang.Channel
----------------
-
-    client.subscribe('my-channel', function(err, channel) {
-        if (err) return;
-        channel.on('message', function(message) {
-            console.log(message.senderId + ' said ' + message.payload.getBytesAsJSON().message);
-        });
-        channel.publish({ message : 'Hi everybody!' });
-    });
-
-
-
-
-
-BigBang.ChannelData
--------------------
-
-    var channelData = channel.getChannelData();
-    channelData.on('add', function(key, value) {
-        console.log('Someone set ' + key + ' to ' + value);
-    });
-    channelData.put('colors', ['red', 'green', 'blue']);

@@ -130,7 +130,7 @@ JsonData json = new JsonData ();
 json ["message"] = "hello";
 
 channel.Publish (json);
-```csharp
+```
 
 ### channel.Publish(JsonData content, Action\<ChannelError> callback)
 Publish *content* to the channel. *content* must be an object or array.
@@ -156,8 +156,8 @@ Fired when a message is received on the channel.
 channel.OnJoin( (joined) => {
     Console.WriteLine( "clientId " + joined + " joined the channel.");
 };
-
 ```
+
 ###  channel.OnJoin(Action<string> join)
 Fired when a subscriber joins the channel.
 
@@ -212,6 +212,7 @@ JsonData m = new JsonData ();
 m ["message"] = "hello channeldata!";
 channelData.Put ("myKey", m);
 ```
+
 ### channelData.Put(string key, JsonData value)
 Set the *value* for *key*.
 
@@ -222,6 +223,7 @@ Set the *value* for *key*.
 
 
 ##Subscribe
+
 ```csharp
 channelData.OnAdd ((key, val) => Console.WriteLine ("added " + key + " => " + val));
 ```
@@ -252,78 +254,3 @@ Fired when anything happens to key. *value* will be the new value, except in the
 ### channelData.Del(string key)
 Remove the value associated with *key*.
 
-
-
-
-
-==============
-Example
-=======
-
-  var client = new BigBang.Client();
-  client.connect('http://demo.bigbang.io', function(err) {
-      if (err) return;
-      console.log('Connected as ' + client.getClientId());
-      
-      client.subscribe('my-channel', function(err, channel) {
-          if (err) return;
-          channel.on('message', function(message) {
-              console.log(message.senderId + ' said ' + message.payload.getBytesAsJSON().message);
-          });         
-          channel.publish({ message : 'Hi everybody!' });
-
-          var channelData = channel.getChannelData();
-          channelData.on('add', function(key, value) {
-              console.log('Someone set ' + key + ' to ' + value);
-          });
-          channelData.put('colors', ['red', 'green', 'blue']);
-      });
-  });
-
-
-
-
-
-
-
-API
-===
-
-BigBang.Client
---------------
-
-Client manages your connection to the server and lets you interface with Channels.
-
-  var client = new BigBang.Client();
-  client.connect('http://demo.bigbang.io', function(err) {
-      if (err) return;
-      console.log('Connected as ' + client.getClientId());
-  });
-  
-
-
-
-BigBang.Channel
----------------
-
-    client.subscribe('my-channel', function(err, channel) {
-        if (err) return;
-        channel.on('message', function(message) {
-            console.log(message.senderId + ' said ' + message.payload.getBytesAsJSON().message);
-        });         
-        channel.publish({ message : 'Hi everybody!' });
-    });
-
-
-
-
-
-BigBang.ChannelData
--------------------
-
-    var channelData = channel.getChannelData();
-    channelData.on('add', function(key, value) {
-        console.log('Someone set ' + key + ' to ' + value);
-    });
-    channelData.put('colors', ['red', 'green', 'blue']);
-  
