@@ -132,7 +132,7 @@ json ["message"] = "hello";
 channel.Publish (json);
 ```
 
-### channel.Publish(JsonData content, Action\<ChannelError> callback)
+### channel.Publish(JsonData content, Action  &lt;ChannelError&rt; event)
 Publish *content* to the channel. *content* must be an object or array.
 
 **Params**

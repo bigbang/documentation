@@ -46,12 +46,12 @@ client.connect("https://demo.bigbang.io", new Action<ConnectionError>() {
 });
 ```
 
-### client.connect(java.lang.String url, Action\<ConnectionError> connectHandler)
+### client.connect(String url, Action&ltConnectionError> connectHandler)
 Connect to a Big Bang application at *url*.
 
 **Params**
 
-- url `string` HTTP or HTTPS URL to your application.
+- url `java.lang.String` HTTP or HTTPS URL to your application.
 - callback (`Error`)
 
 
@@ -62,7 +62,7 @@ Disconnect from the server.
 ### client.getClientId()
 Your unique identifier for this session. This identifies you to the server and to other users.
 
-Returns `string` clientId
+Returns `java.lang.String` clientId
 
 
 ##Subscribe
@@ -90,7 +90,7 @@ client.disconnected(new Action<Void>() {
     }
 });
 ```
-### client.disconnected(Action<java.lang.Void> callback)
+### client.disconnected(Action&ltVoid> callback)
 
 
 
@@ -105,12 +105,12 @@ Group together multiple clients in a channel to share information. Channels are 
 ```java
 Channel channel = client.getChannel("example-channel");
 ```
-### client.getChannel(java.lang.String channelName)
+### client.getChannel(String channelName)
 Get a reference to the Channel object for the subscribed channel called *channelName*.
 
 **Params**
 
-- channelName `string`
+- channelName `java.lang.String`
 
 Returns `Channel`
 
@@ -135,7 +135,7 @@ Subscribe to a  channel called *channelName*. *channel* will be a Channel object
 - callback (`ChannelError`,`Channel`)
 
 
-### channel.unsubscribe(Action\<Void> callback)
+### channel.unsubscribe(Action&ltVoid> callback)
 Unsubscribe from the current channel.
 
 
@@ -151,12 +151,12 @@ json.putString("message", "hello");
 channel.publish(json);
 ```
 
-### channel.publish(io.bigbang.protocol.JsonObject content, Action\<ChannelError> callback)
+### channel.publish(JsonObject content, Action&lt;ChannelError> callback)
 Publish *content* to the channel. *content* must be an object or array.
 
 **Params**
 
-- content `object` (JSON)
+- content `io.bigbang.protocol.JsonObject` (JSON)
 - callback `ChannelError` if publish fails or is rejected
 
 
@@ -169,7 +169,7 @@ channel.onMessage(new Action<ChannelMessage>() {
     }
 });
 ```
-### channel.onMessage(Action<ChannelMessage> handler)
+### channel.onMessage(Action&lt;ChannelMessage> handler)
 Fired when a message is received on the channel.
 
 ```java
@@ -180,7 +180,7 @@ channel.onJoin(new Action<String>() {
     }
 });
 ```
-###  channel.onJoin(Action<java.lang.String> join)
+###  channel.onJoin(Action&lt;String> join)
 Fired when a subscriber joins the channel.
 
 
@@ -225,7 +225,7 @@ Returns a *ChannelData* object for the given namespace. Namespaces can be used t
 Returns `ChannelData`
 
 
-### channelData.get(java.lang.String key)
+### channelData.get(String key)
 
 **Params**
 
@@ -234,7 +234,7 @@ Returns `ChannelData`
 Returns the type `io.bigbang.protocol.JsonElement` unless the key doesn't exist. Returns null if the key doesn't exist.
 
 
-### channelData.get(java.lang.String key, java.lang.Class\<T> type)
+### channelData.get(java.lang.String key, java.lang.Class&lt;T> type)
 
 **Params**
 
@@ -250,7 +250,7 @@ JsonObject msg = new JsonObject();
 msg.putString("message", "hello channeldata!");
 channelData.put("myKey", msg);
 ```
-### channelData.put(java.lang.String key, io.bigbang.protocol.JsonElement value)
+### channelData.put(String key, JsonElement value)
 Set the *value* for *key*.
 
 **Params**
@@ -280,7 +280,7 @@ channelData.onUpdate(new Action2<String, JsonElement>() {
     }
 });
 ```
-### channelData.onUpdate(Action2<String, JsonElement> update)
+### channelData.onUpdate(Action2&lt;String, JsonElement> update)
 Fires when a key's value is updated.
 
 ```java
@@ -291,7 +291,7 @@ channelData.onRemove(new Action<String>() {
     }
 });
 ```
-### channelData.onRemove(Action\<String> remove)
+### channelData.onRemove(Action&lt;String> remove)
 Fired when a key (and it's value) is removed.
 
 
