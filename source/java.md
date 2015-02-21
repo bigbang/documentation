@@ -7,13 +7,7 @@ Big Bang lets you create realtime applications in seconds.  It makes event strea
 Installation
 ============
 
-    ##TODO put in a maven repository.  Also with ponies.
-or
-
-    ##TODO put in a gradle repository
-or
-
-    ##TODO direct download link
+Download the [preview release here](https://github.com/bigbang/bigbang-client-java/releases/download/0.0.1/bigbang-client-java-0.0.1.zip).  Unzip the archive and add the included jars to your application's classpath.
 
 
 Servers
@@ -29,9 +23,6 @@ You will work with three resources when using Big Bang. First, you will need to 
 
 
 #Connection
-Connecting your app to Big Bang is easy.
-##Basics
-
 ```java
 final BigBangClient client = new DefaultBigBangClient();
 
@@ -45,8 +36,10 @@ client.connect("https://demo.bigbang.io", new Action<ConnectionError>() {
     }
 });
 ```
+Connecting your app to Big Bang is easy.
+##Basics
 
-### client.connect(String url, Action&ltConnectionError> connectHandler)
+### client.connect(String url, Action&lt;ConnectionError> connectHandler)
 Connect to a Big Bang application at *url*.
 
 **Params**
@@ -90,7 +83,7 @@ client.disconnected(new Action<Void>() {
     }
 });
 ```
-### client.disconnected(Action&ltVoid> callback)
+### client.disconnected(Action&lt;Void> callback)
 
 
 
@@ -126,16 +119,16 @@ client.subscribe("example-channel", new Action2<ChannelError, Channel>() {
     }
 });
 ```
-### client.subscribe(java.lang.String channelName, Action2<ChannelError, Channel> callback)
+### client.subscribe(String channelName, Action2&lt;ChannelError, Channel> callback)
 Subscribe to a  channel called *channelName*. *channel* will be a Channel object.
 
 **Params**
 
-- channelName `string`
+- channelName `java.lang.String`
 - callback (`ChannelError`,`Channel`)
 
 
-### channel.unsubscribe(Action&ltVoid> callback)
+### channel.unsubscribe(Action&lt;Void> callback)
 Unsubscribe from the current channel.
 
 
@@ -213,9 +206,9 @@ ChannelData channelData = channel.getChannelData();
 Returns a *ChannelData* object for the default namespace.
 
 ```java
-ChannelData channelData = channel.getChannelData('my-namespace');
+ChannelData channelData = channel.getChannelData("my-namespace");
 ```
-### channel.getChannelData(namespace)
+### channel.getChannelData(String namespace)
 Returns a *ChannelData* object for the given namespace. Namespaces can be used to organize your channel's data.
 
 **Params**
@@ -231,9 +224,12 @@ Returns `ChannelData`
 
 - key `java.lang.String`
 
-Returns the type `io.bigbang.protocol.JsonElement` unless the key doesn't exist. Returns null if the key doesn't exist.
+Returns `io.bigbang.protocol.JsonElement` unless the key doesn't exist. Returns null if the key doesn't exist.
 
 
+```java
+JsonObject json = channelData.get("myKey", JsonObject.class);
+```
 ### channelData.get(java.lang.String key, java.lang.Class&lt;T> type)
 
 **Params**
@@ -269,7 +265,7 @@ channelData.onAdd(new Action2<String, JsonElement>() {
     }
 });
 ```
-### channelData.onAdd(Action2<String, JsonElement> add)
+### channelData.onAdd(Action2&lt;String, JsonElement> add)
 Fires when a new key and value is added.
 
 ```java
@@ -312,5 +308,10 @@ Fired when anything happens to key. *value* will be the new value, except in the
 ```java
 channelData.remove("myKey");
 ```
-### channelData.del(java.lang.String key)
+### channelData.remove(java.lang.String key)
 Remove the value associated with *key*.
+
+**Params**
+
+- key `java.lang.String`
+
