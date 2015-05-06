@@ -10,6 +10,18 @@ Edit the corresponding file in /source
 1. Add a .md file in source with the name of the language
 2. Edit data/config.yml with the new language
 
+
+### Local development
+
+    bundle exec middleman server
+
+### Pushing updates
+
+May need to rm -rf build directory first then..
+
+    rake publish
+
+
 Slate
 ========
 
