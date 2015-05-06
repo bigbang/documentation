@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Big Bang Client SDK</title>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <link href="../stylesheets/screen-8ba76c86.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print-4f1abb79.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="../javascripts/all-ac9e813e.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          language = "csharp"
+          localStorage.setItem("language", language);
+          activateLanguage(language);
+        });
+      </script>
+  </head>
+
+  <body class="csharp csharp_index">
+    <nav>
+  <div class="logo">
+  <img src="../images/bigbang-342a2a1f.png" />
+  <div>Big Bang</div>
+  </div>
+  <ul class="links">
+    <li><a href="#">Documentation</a></li>
+    <li><a href="#">Support</a></li>
+  </ul>
+  <div class="pull-right">
+    <a href="#">Log In</a>
+    <a href="#">Sign Up</a>
+  </div>
+</nav>
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar-6c2f9478.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="../javascript" data-language-name="javascript">javascript</a>
+              <a href="../java" data-language-name="java">java</a>
+              <a href="../csharp" data-language-name="csharp">csharp</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="big-bang-client-sdk">Big Bang Client SDK</h1>
+
+<p>Big Bang lets you create realtime applications in seconds.  It makes event streaming and data synchronization a snap!</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>##TODO direct download link
+or</p>
+
+<p>##TODO nuget</p>
+
+<h1 id="servers">Servers</h1>
+
+<p>Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use <code class="prettyprint">http://demo.bigbang.io</code> to try things out. When you are ready, you can create your own application at <a href="https://cloud.bigbang.io/">https://cloud.bigbang.io/</a>.</p>
+
+<h1 id="overview">Overview</h1>
+
+<p>You will work with three resources when using Big Bang. First, you will need to manage your connection to our servers. Once you have established a connection, you will subscribe to a Channel. All shared information is scoped to a Channel. You can publish and subscribe one-time messages. If you want to give all subscribers a constantly updated state of your data, you can publish and subscribe ChannelData.</p>
+
+<h1 id="connection">Connection</h1>
+
+<p>Connecting your app to Big Bang is easy.</p>
+
+<h2 id="basics">Basics</h2>
+<pre><code class="highlight csharp"><span class="n">BigBangClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DefaultBigBangClient</span> <span class="p">();</span>
+
+<span class="n">client</span><span class="p">.</span><span class="nf">Connect</span> <span class="p">(</span><span class="s">"https://demo.bigbang.io"</span><span class="p">,</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="p">!=</span> <span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="n">err</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="s">"Connected as "</span> <span class="p">+</span> <span class="n">client</span><span class="p">.</span><span class="n">ClientId</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="client.connect(string-url,-action&lt;connectionerror&gt;-connecthandler)">client.Connect(string url, Action&lt;ConnectionError&gt; connectHandler)</h3>
+
+<p>Connect to a Big Bang application at <em>url</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>url <code class="prettyprint">string</code> HTTP or HTTPS URL to your application.</li>
+<li>callback (<code class="prettyprint">Error</code>)</li>
+</ul>
+
+<h3 id="client.disconnect()">client.Disconnect()</h3>
+
+<p>Disconnect from the server.</p>
+
+<h3 id="client.getclientid()">client.GetClientId()</h3>
+
+<p>Your unique identifier for this session. This identifies you to the server and to other users.</p>
+
+<p>Returns <code class="prettyprint">string</code> clientId</p>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight csharp"><span class="n">client</span><span class="p">.</span><span class="nf">Subscribe</span> <span class="p">(</span><span class="s">"example-channel"</span><span class="p">,</span> <span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">channel</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="p">!=</span> <span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//We had a problem subscribing.
+</span>        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="n">err</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="s">"Subscribed to channel "</span> <span class="p">+</span> <span class="n">channel</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+
+<h2 id="disconnect">Disconnect</h2>
+<pre><code class="highlight plaintext">client.Disconnected( () =&gt; Console.WriteLine("Client disconnected!"));
+</code></pre>
+
+<h3 id="client.disconnected(action-callback)">client.Disconnected(Action callback)</h3>
+
+<p>Fired when the client has been disconnected, either from calling disconnect() or for reasons beyond your control.</p>
+
+<h1 id="channel">Channel</h1>
+
+<p>Group together multiple clients in a channel to share information. Channels are publish/subscribe. You can subscribe to a Channel to get any messages that are published to it. You can publish a message to send it to all subscribers.</p>
+
+<h2 id="basics">Basics</h2>
+<pre><code class="highlight csharp"><span class="n">Channel</span> <span class="n">channel</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetChannel</span> <span class="p">(</span><span class="s">"example-channel"</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="client.getchannel(string-channelname)">client.GetChannel(string channelName)</h3>
+
+<p>Get a reference to the Channel object for the subscribed channel called <em>channelName</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>channelName <code class="prettyprint">string</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">Channel</code></p>
+<pre><code class="highlight csharp"><span class="n">client</span><span class="p">.</span><span class="nf">Subscribe</span> <span class="p">(</span><span class="s">"example-channel"</span><span class="p">,</span> <span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">channel</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="p">!=</span> <span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//We had a problem subscribing.
+</span>        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="n">err</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="s">"Subscribed to channel "</span> <span class="p">+</span> <span class="n">channel</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="client.subscribe(string-channelname,-action-callback)">client.Subscribe(string channelName, Action<ChannelError, Channel> callback)</h3>
+
+<p>Subscribe to a  channel called <em>channelName</em>. <em>channel</em> will be a Channel object.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>channelName <code class="prettyprint">string</code></li>
+<li>callback (<code class="prettyprint">ChannelError</code>,<code class="prettyprint">Channel</code>)</li>
+</ul>
+
+<h3 id="channel.unsubscribe(action-callback)">channel.Unsubscribe(Action callback)</h3>
+
+<p>Unsubscribe from the current channel.</p>
+
+<h3 id="channel.getsubscribers()">channel.GetSubscribers()</h3>
+
+<p>Returns an <code class="prettyprint">List&lt;string&gt;</code> containing the clientIds of the current subscribers on this channel.</p>
+
+<h2 id="publish">Publish</h2>
+<pre><code class="highlight csharp"><span class="n">JsonData</span> <span class="n">json</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">JsonData</span> <span class="p">();</span>
+<span class="n">json</span> <span class="p">[</span><span class="s">"message"</span><span class="p">]</span> <span class="p">=</span> <span class="s">"hello"</span><span class="p">;</span>
+
+<span class="n">channel</span><span class="p">.</span><span class="nf">Publish</span> <span class="p">(</span><span class="n">json</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="channel.publish(jsondata-content,-action-&lt;channelerror&rt;-event)">channel.Publish(JsonData content, Action  &lt;ChannelError&rt; event)</h3>
+
+<p>Publish <em>content</em> to the channel. <em>content</em> must be an object or array.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>content <code class="prettyprint">object</code> (JSON)</li>
+<li>callback <code class="prettyprint">ChannelError</code> if publish fails or is rejected</li>
+</ul>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight csharp"><span class="n">channel</span><span class="p">.</span><span class="nf">OnMessage</span> <span class="p">((</span><span class="n">msg</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">Payload</span><span class="p">.</span><span class="nf">GetBytesAsJSON</span> <span class="p">());</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="channel.onmessage(action-handler)">channel.OnMessage(Action<ChannelMessage> handler)</h3>
+
+<p>Fired when a message is received on the channel.</p>
+<pre><code class="highlight csharp"><span class="n">channel</span><span class="p">.</span><span class="nf">OnJoin</span><span class="p">(</span> <span class="p">(</span><span class="n">joined</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span> <span class="s">"clientId "</span> <span class="p">+</span> <span class="n">joined</span> <span class="p">+</span> <span class="s">" joined the channel."</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre>
+
+<h3 id="channel.onjoin(action-join)">channel.OnJoin(Action<string> join)</h3>
+
+<p>Fired when a subscriber joins the channel.</p>
+<pre><code class="highlight csharp"><span class="n">channel</span><span class="p">.</span><span class="nf">OnLeave</span><span class="p">(</span> <span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span> <span class="s">"clientId "</span> <span class="p">+</span> <span class="n">left</span>  <span class="p">+</span><span class="s">" left the channel."</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre>
+
+<h3 id="channel.onleave(action-leave)">channel.OnLeave(Action<string> leave)</h3>
+
+<p>Fired when a subscriber leaves the channel.</p>
+
+<h1 id="channeldata">ChannelData</h1>
+
+<p>ChannelData objects are used to store the state of your data. ChannelData persist as long as the Channel is active and they are automatically synchronized to all subscribers of the channel.</p>
+
+<h2 id="basics">Basics</h2>
+
+<h3 id="channel.getnamespaces()">channel.GetNamespaces()</h3>
+
+<p>Get the current <em>ChannelData</em> namespace names as an <code class="prettyprint">List&lt;string&gt;</code>.</p>
+
+<p>Returns <code class="prettyprint">ChannelData</code> unless no namespaces exist. Returns null if no namespaces exist.</p>
+
+<h3 id="channel.getchanneldata()">channel.GetChannelData()</h3>
+
+<p>Returns a <em>ChannelData</em> object for the default namespace.</p>
+
+<h3 id="channel.getchanneldata(namespace)">channel.GetChannelData(namespace)</h3>
+
+<p>Returns a <em>ChannelData</em> object for the given namespace. Namespaces can be used to organize your channel&rsquo;s data.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>namespace <code class="prettyprint">java.lang.String namespace</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">ChannelData</code></p>
+<pre><code class="highlight csharp"><span class="n">JsonData</span> <span class="n">val</span> <span class="p">=</span> <span class="n">channelData</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">"myKey"</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="channeldata.get(string-key)">channelData.Get(string key)</h3>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">string</code></li>
+</ul>
+
+<p>Returns the type <code class="prettyprint">JsonData</code> unless the key doesn&rsquo;t exist. Returns null if the key doesn&rsquo;t exist. </p>
+
+<h2 id="publish">Publish</h2>
+<pre><code class="highlight csharp"><span class="n">JsonData</span> <span class="n">m</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">JsonData</span> <span class="p">();</span>
+<span class="n">m</span> <span class="p">[</span><span class="s">"message"</span><span class="p">]</span> <span class="p">=</span> <span class="s">"hello channeldata!"</span><span class="p">;</span>
+<span class="n">channelData</span><span class="p">.</span><span class="nf">Put</span> <span class="p">(</span><span class="s">"myKey"</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="channeldata.put(string-key,-jsondata-value)">channelData.Put(string key, JsonData value)</h3>
+
+<p>Set the <em>value</em> for <em>key</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">string</code></li>
+<li>value <code class="prettyprint">JsonData</code></li>
+</ul>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight csharp"><span class="n">channelData</span><span class="p">.</span><span class="nf">OnAdd</span> <span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="s">"added "</span> <span class="p">+</span> <span class="n">key</span> <span class="p">+</span> <span class="s">" =&gt; "</span> <span class="p">+</span> <span class="n">val</span><span class="p">));</span>
+</code></pre>
+
+<h3 id="channeldata.onadd(action-add)">channelData.OnAdd(Action<string, JsonData> add)</h3>
+
+<p>Fires when a new key and value is added.</p>
+<pre><code class="highlight csharp"><span class="n">channelData</span><span class="p">.</span><span class="nf">OnUpdate</span> <span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="s">"updated "</span> <span class="p">+</span> <span class="n">key</span> <span class="p">+</span> <span class="s">" =&gt; "</span> <span class="p">+</span> <span class="n">val</span><span class="p">));</span>
+</code></pre>
+
+<h3 id="channeldata.onupdate(action-update)">channelData.OnUpdate(Action<string, JsonData> update)</h3>
+
+<p>Fires when a key&rsquo;s value is updated.</p>
+<pre><code class="highlight csharp"><span class="n">channelData</span><span class="p">.</span><span class="nf">OnRemove</span> <span class="p">((</span><span class="n">key</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span> <span class="p">(</span><span class="s">"removed "</span> <span class="p">+</span> <span class="n">key</span><span class="p">));</span>
+</code></pre>
+
+<h3 id="channeldata.onremove(action&lt;string&gt;-remove)">channelData.OnRemove(Action&lt;string&gt; remove)</h3>
+
+<p>Fired when a key (and it&rsquo;s value) is removed.</p>
+<pre><code class="highlight csharp"><span class="n">channelData</span><span class="p">.</span><span class="nf">On</span><span class="p">(</span><span class="s">"myKey"</span><span class="p">,</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="n">op</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"key operation is "</span> <span class="p">+</span> <span class="n">op</span><span class="p">));</span>
+</code></pre>
+
+<h3 id="channeldata.on(string-key,-action-value)">channelData.On(string key, Action<JsonData, string> value)</h3>
+
+<p>Fired when anything happens to key. <em>value</em> will be the new value, except in the case of a remove <em>operation</em> returning null instead. <em>operation</em> is one of add, update or remove. This event is an easy way to monitor a single key.</p>
+
+<h2 id="maintenance">Maintenance</h2>
+
+<h3 id="channeldata.del(string-key)">channelData.Del(string key)</h3>
+
+<p>Remove the value associated with <em>key</em>.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="../javascript" data-language-name="javascript">javascript</a>
+                <a href="../java" data-language-name="java">java</a>
+                <a href="../csharp" data-language-name="csharp">csharp</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

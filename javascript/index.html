@@ -1,0 +1,325 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Big Bang Client SDK</title>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <link href="../stylesheets/screen-8ba76c86.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print-4f1abb79.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="../javascripts/all-ac9e813e.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          language = "javascript"
+          localStorage.setItem("language", language);
+          activateLanguage(language);
+        });
+      </script>
+  </head>
+
+  <body class="javascript javascript_index">
+    <nav>
+  <div class="logo">
+  <img src="../images/bigbang-342a2a1f.png" />
+  <div>Big Bang</div>
+  </div>
+  <ul class="links">
+    <li><a href="#">Documentation</a></li>
+    <li><a href="#">Support</a></li>
+  </ul>
+  <div class="pull-right">
+    <a href="#">Log In</a>
+    <a href="#">Sign Up</a>
+  </div>
+</nav>
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar-6c2f9478.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="../javascript" data-language-name="javascript">javascript</a>
+              <a href="../java" data-language-name="java">java</a>
+              <a href="../csharp" data-language-name="csharp">csharp</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="big-bang-client-sdk">Big Bang Client SDK</h1>
+
+<p>Big Bang lets you create realtime applications in seconds.  It makes event streaming and data synchronization a snap!</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>npm install bigbang.io &ndash;save</p>
+
+<p>or</p>
+
+<p>bower install bigbang.io &ndash;save</p>
+
+<h1 id="servers">Servers</h1>
+
+<p>Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use <code class="prettyprint">http://demo.bigbang.io</code> to try things out. When you are ready, you can create your own application at <a href="https://cloud.bigbang.io/">https://cloud.bigbang.io/</a>.</p>
+
+<h1 id="overview">Overview</h1>
+
+<p>You will work with three resources when using Big Bang. First, you will need to manage your connection to our servers. Once you have established a connection, you will subscribe to a Channel. All shared information is scoped to a Channel. You can publish and subscribe one-time messages. If you want to give all subscribers a constantly updated state of your data, you can publish and subscribe ChannelData.</p>
+
+<h1 id="connection">Connection</h1>
+
+<p>Connecting your app to Big Bang is easy.</p>
+
+<h2 id="basics">Basics</h2>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigBang</span><span class="p">.</span><span class="nx">Client</span><span class="p">();</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">'https://demo.bigbang.io'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Connected as '</span> <span class="o">+</span> <span class="nx">client</span><span class="p">.</span><span class="nx">getClientId</span><span class="p">());</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="client.connect(url,-function(err))">client.connect(url, function(err))</h3>
+
+<p>Connect to a Big Bang application at <em>url</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>url <code class="prettyprint">string</code> HTTP or HTTPS URL to your application.</li>
+<li>callback (<code class="prettyprint">Error</code>)</li>
+</ul>
+
+<h3 id="client.disconnect()">client.disconnect()</h3>
+
+<p>Disconnect from the server.</p>
+
+<h3 id="client.getclientid()">client.getClientId()</h3>
+
+<p>Your unique identifier for this session. This identifies you to the server and to other users.</p>
+
+<p>Returns <code class="prettyprint">string</code> clientId</p>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight javascript"><span class="nx">client</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">'example-channel'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">channel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Subscribed to channel '</span> <span class="o">+</span> <span class="nx">channel</span><span class="p">.</span><span class="nx">getName</span><span class="p">());</span>
+<span class="p">});</span>
+</code></pre>
+
+<h2 id="disconnect">Disconnect</h2>
+<pre><code class="highlight javascript"><span class="nx">client</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'disconnected'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Client disconnected.'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="client.on(&#39;disconnected&#39;,-function(reason))">client.on(&lsquo;disconnected&rsquo;, function(reason))</h3>
+
+<p>Fired when the client has been disconnected, either from calling disconnect() or for reasons beyond your control.</p>
+
+<h1 id="channel">Channel</h1>
+
+<p>Group together multiple clients in a channel to share information. Channels are publish/subscribe. You can subscribe to a Channel to get any messages that are published to it. You can publish a message to send it to all subscribers.</p>
+
+<h2 id="basics">Basics</h2>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">getChannel</span><span class="p">(</span><span class="s1">'example-channel'</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="client.getchannel(channelname)">client.getChannel(channelName)</h3>
+
+<p>Get a reference to the Channel object for the subscribed channel called <em>channelName</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>channelName <code class="prettyprint">string</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">Channel</code> </p>
+<pre><code class="highlight javascript"><span class="nx">client</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">'example-channel'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">channel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Subscribed to channel '</span> <span class="o">+</span> <span class="nx">channel</span><span class="p">.</span><span class="nx">getName</span><span class="p">());</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="client.subscribe(channelname,-function(err,-channel))">client.subscribe(channelName, function(err, channel))</h3>
+
+<p>Subscribe to a  channel called <em>channelName</em>. <em>channel</em> will be a Channel object.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>channelName <code class="prettyprint">string</code></li>
+<li>callback (<code class="prettyprint">Error</code>,<code class="prettyprint">Channel</code>)</li>
+</ul>
+
+<h3 id="channel.unsubscribe(function())">channel.unsubscribe(function())</h3>
+
+<p>Unsubscribe from the current channel.</p>
+
+<h3 id="channel.getsubscribers()">channel.getSubscribers()</h3>
+
+<p>Returns an <code class="prettyprint">Array</code> containing the clientIds of the current subscribers on this channel.</p>
+
+<h2 id="publish">Publish</h2>
+<pre><code class="highlight javascript"><span class="nx">channel</span><span class="p">.</span><span class="nx">publish</span><span class="p">({</span> <span class="na">message</span><span class="p">:</span> <span class="s1">'hello'</span> <span class="p">});</span>
+</code></pre>
+
+<h3 id="channel.publish(obj,-function(err))">channel.publish(obj, function(err))</h3>
+
+<p>Publish <em>obj</em> to the channel. <em>obj</em> must be an object or array.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>obj <code class="prettyprint">object</code> (JSON) or <code class="prettyprint">array</code></li>
+<li>callback <code class="prettyprint">Error</code> if publish fails or is rejected</li>
+</ul>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight javascript"><span class="nx">channel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">getBytesAsJSON</span><span class="p">()));</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="channel.on(&#39;message&#39;,-function(msg))">channel.on(&#39;message&rsquo;, function(msg))</h3>
+
+<p>Fired when a message is received on the channel.</p>
+<pre><code class="highlight javascript"><span class="nx">channel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'join'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">joined</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'clientId '</span> <span class="o">+</span> <span class="nx">joined</span> <span class="o">+</span> <span class="s1">' joined the channel.'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="channel.on(&#39;join&#39;,-function(clientid))">channel.on(&#39;join&rsquo;, function(clientId))</h3>
+
+<p>Fired when a subscriber joins the channel.</p>
+<pre><code class="highlight javascript"><span class="nx">channel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'leave'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">left</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'clientId '</span> <span class="o">+</span> <span class="nx">left</span> <span class="o">+</span> <span class="s1">' left the channel.'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="channel.on(&#39;leave&#39;,-function(clientid))">channel.on(&#39;leave&rsquo;, function(clientId))</h3>
+
+<p>Fired when a subscriber leaves the channel.</p>
+
+<h1 id="channeldata">ChannelData</h1>
+
+<p>ChannelData objects are used to store the state of your data. ChannelData persist as long as the Channel is active and they are automatically synchronized to all subscribers of the channel.</p>
+
+<h2 id="basics">Basics</h2>
+
+<h3 id="channel.getnamespaces()">channel.getNamespaces()</h3>
+
+<p>Get the current <em>ChannelData</em> namespace names as an Array.</p>
+
+<p>Returns <code class="prettyprint">ChannelData</code> unless no namespaces exist. Returns null if no namespaces exist.</p>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">channelData</span> <span class="o">=</span> <span class="nx">channel</span><span class="p">.</span><span class="nx">getChannelData</span><span class="p">();</span>
+</code></pre>
+
+<h3 id="channel.getchanneldata(namespace)">channel.getChannelData(namespace)</h3>
+
+<p>Returns a <em>ChannelData</em> object for the given namespace. If no namespace is supplied a default will be used. Namespaces can be used to organize your channel&rsquo;s data.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>namespace <code class="prettyprint">string</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">ChannelData</code></p>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">channelData</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'myKey'</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="channeldata.get(key)">channelData.get(key)</h3>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">string</code></li>
+</ul>
+
+<p>Returns the <code class="prettyprint">object</code> (JSON) or <code class="prettyprint">Array</code> value associated with key, or null if the key does not exist.</p>
+
+<h2 id="publish">Publish</h2>
+<pre><code class="highlight javascript"><span class="nx">channelData</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">'myKey'</span><span class="p">,</span> <span class="p">{</span><span class="na">message</span><span class="p">:</span> <span class="s1">'hello channeldata!'</span><span class="p">});</span>
+</code></pre>
+
+<h3 id="channeldata.put(key,-value)">channelData.put(key, value)</h3>
+
+<p>Set the <em>value</em> for <em>key</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">string</code></li>
+<li>value <code class="prettyprint">object</code> (JSON) or <code class="prettyprint">Array</code></li>
+</ul>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight javascript"><span class="nx">channelData</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'add'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'added '</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">' =&gt; '</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">val</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="channeldata.on(&#39;add&#39;,-function(key,-value))">channelData.on(&#39;add&rsquo;, function(key, value))</h3>
+
+<p>Fires when a new key and value is added.</p>
+<pre><code class="highlight javascript"><span class="nx">channelData</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'update'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'updated '</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">' =&gt; '</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">val</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="channeldata.on(&#39;update&#39;,-function(key,-value))">channelData.on(&#39;update&rsquo;, function(key, value))</h3>
+
+<p>Fires when a key&rsquo;s value is updated.</p>
+
+<p><code class="prettyprint">channelData.on(&#39;remove&#39;, function (key) {
+   console.log(&#39;removed &#39; + key);
+});
+</code></p>
+
+<h3 id="channeldata.on(&#39;remove&#39;,-function(key))">channelData.on(&#39;remove&rsquo;, function(key))</h3>
+
+<p>Fired when a key (and it&rsquo;s value) is removed.</p>
+<pre><code class="highlight javascript"><span class="nx">channelData</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'myKey'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">op</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">'key operation is '</span> <span class="o">+</span> <span class="nx">op</span> <span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="channeldata.on(key,-function(value,-operation))">channelData.on(key, function(value, operation))</h3>
+
+<p>Fired when anything happens to key. <em>value</em> will be the new value, except in the case of a remove <em>operation</em> returning null instead. <em>operation</em> is one of add, update or remove. This event is an easy way to monitor a single key.</p>
+
+<h2 id="maintenance">Maintenance</h2>
+
+<h3 id="channeldata.remove(key)">channelData.remove(key)</h3>
+
+<p>Remove the value associated with <em>key</em>.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="../javascript" data-language-name="javascript">javascript</a>
+                <a href="../java" data-language-name="java">java</a>
+                <a href="../csharp" data-language-name="csharp">csharp</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

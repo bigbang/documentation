@@ -1,0 +1,420 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Big Bang Client SDK</title>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <link href="../stylesheets/screen-8ba76c86.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print-4f1abb79.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="../javascripts/all-ac9e813e.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          language = "java"
+          localStorage.setItem("language", language);
+          activateLanguage(language);
+        });
+      </script>
+  </head>
+
+  <body class="java java_index">
+    <nav>
+  <div class="logo">
+  <img src="../images/bigbang-342a2a1f.png" />
+  <div>Big Bang</div>
+  </div>
+  <ul class="links">
+    <li><a href="#">Documentation</a></li>
+    <li><a href="#">Support</a></li>
+  </ul>
+  <div class="pull-right">
+    <a href="#">Log In</a>
+    <a href="#">Sign Up</a>
+  </div>
+</nav>
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar-6c2f9478.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="../javascript" data-language-name="javascript">javascript</a>
+              <a href="../java" data-language-name="java">java</a>
+              <a href="../csharp" data-language-name="csharp">csharp</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="big-bang-client-sdk">Big Bang Client SDK</h1>
+
+<p>Big Bang lets you create realtime applications in seconds.  It makes event streaming and data synchronization a snap!</p>
+
+<h1 id="installation">Installation</h1>
+
+<h2 id="gradle">Gradle</h2>
+
+<p>If you are using Gradle to build your project, add the following custom repository and dependency to your <code class="prettyprint">build.gradle</code></p>
+<pre><code class="highlight java"><span class="n">repositories</span> <span class="o">{</span>
+  <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s">"https://dl.bintray.com/bigbang/maven"</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+  <span class="n">compile</span> <span class="o">(</span><span class="s">"io.bigbang.client:bigbang-client-java:0.0.2"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="maven">Maven</h2>
+
+<p>For Maven builds, add the following custom repository and dependency to your <code class="prettyprint">pom.xml</code></p>
+<pre><code class="highlight java"><span class="o">&lt;</span><span class="n">repositories</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">repository</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">id</span><span class="o">&gt;</span><span class="n">bigbang</span><span class="o">&lt;/</span><span class="n">id</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">Big</span> <span class="n">Bang</span> <span class="n">SDK</span> <span class="n">Repository</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span><span class="nl">https:</span><span class="c1">//dl.bintray.com/bigbang/maven&lt;/url&gt;</span>
+    <span class="o">&lt;/</span><span class="n">repository</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">repositories</span><span class="o">&gt;</span>
+
+ <span class="o">&lt;</span><span class="n">dependencies</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">io</span><span class="o">.</span><span class="na">bigbang</span><span class="o">.</span><span class="na">client</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">bigbang</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">java</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">scope</span><span class="o">&gt;</span><span class="n">compile</span><span class="o">&lt;/</span><span class="n">scope</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>  
+  <span class="o">&lt;/</span><span class="n">dependencies</span><span class="o">&gt;</span>
+</code></pre>
+
+<h2 id="download">Download</h2>
+
+<p>Download the <a href="https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.2">full binary release here</a>.  Unzip the archive and add the included jars to your application&rsquo;s classpath.</p>
+
+<h1 id="servers">Servers</h1>
+
+<p>Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use <code class="prettyprint">http://demo.bigbang.io</code> to try things out. When you are ready, you can create your own application at <a href="https://cloud.bigbang.io/">https://cloud.bigbang.io/</a>.</p>
+
+<h1 id="overview">Overview</h1>
+
+<p>You will work with three resources when using Big Bang. First, you will need to manage your connection to our servers. Once you have established a connection, you will subscribe to a Channel. All shared information is scoped to a Channel. You can publish and subscribe one-time messages. If you want to give all subscribers a constantly updated state of your data, you can publish and subscribe ChannelData.</p>
+
+<h1 id="connection">Connection</h1>
+<pre><code class="highlight java"><span class="kd">final</span> <span class="n">BigBangClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultBigBangClient</span><span class="o">();</span>
+
+<span class="n">client</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"https://demo.bigbang.io"</span><span class="o">,</span> <span class="k">new</span> <span class="n">Action</span><span class="o">&lt;</span><span class="n">ConnectionError</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">ConnectionError</span> <span class="n">err</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">err</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">err</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Connected as "</span> <span class="o">+</span> <span class="n">client</span><span class="o">.</span><span class="na">getClientId</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<p>Connecting your app to Big Bang is easy.</p>
+
+<h2 id="basics">Basics</h2>
+
+<h3 id="client.connect(string-url,-action&lt;connectionerror&gt;-connecthandler)">client.connect(String url, Action&lt;ConnectionError&gt; connectHandler)</h3>
+
+<p>Connect to a Big Bang application at <em>url</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>url <code class="prettyprint">java.lang.String</code> HTTP or HTTPS URL to your application.</li>
+<li>callback (<code class="prettyprint">Error</code>)</li>
+</ul>
+
+<h3 id="client.disconnect()">client.disconnect()</h3>
+
+<p>Disconnect from the server.</p>
+
+<h3 id="client.getclientid()">client.getClientId()</h3>
+
+<p>Your unique identifier for this session. This identifies you to the server and to other users.</p>
+
+<p>Returns <code class="prettyprint">java.lang.String</code> clientId</p>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight java"><span class="n">client</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="s">"example-channel"</span><span class="o">,</span> <span class="k">new</span> <span class="n">Action2</span><span class="o">&lt;</span><span class="n">ChannelError</span><span class="o">,</span> <span class="n">Channel</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">ChannelError</span> <span class="n">err</span><span class="o">,</span> <span class="n">Channel</span> <span class="n">channel</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">err</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">err</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Subscribed to channel "</span> <span class="o">+</span> <span class="n">channel</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h2 id="disconnect">Disconnect</h2>
+<pre><code class="highlight java"><span class="n">client</span><span class="o">.</span><span class="na">disconnected</span><span class="o">(</span><span class="k">new</span> <span class="n">Action</span><span class="o">&lt;</span><span class="n">Void</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">Void</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Client disconnected"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h3 id="client.disconnected(action&lt;void&gt;-callback)">client.disconnected(Action&lt;Void&gt; callback)</h3>
+
+<p>Fired when the client has been disconnected, either from calling disconnect() or for reasons beyond your control.</p>
+
+<h1 id="channel">Channel</h1>
+
+<p>Group together multiple clients in a channel to share information. Channels are publish/subscribe. You can subscribe to a Channel to get any messages that are published to it. You can publish a message to send it to all subscribers.</p>
+
+<h2 id="basics">Basics</h2>
+<pre><code class="highlight java"><span class="n">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">getChannel</span><span class="o">(</span><span class="s">"example-channel"</span><span class="o">);</span>
+</code></pre>
+
+<h3 id="client.getchannel(string-channelname)">client.getChannel(String channelName)</h3>
+
+<p>Get a reference to the Channel object for the subscribed channel called <em>channelName</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>channelName <code class="prettyprint">java.lang.String</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">Channel</code></p>
+<pre><code class="highlight java"><span class="n">client</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="s">"example-channel"</span><span class="o">,</span> <span class="k">new</span> <span class="n">Action2</span><span class="o">&lt;</span><span class="n">ChannelError</span><span class="o">,</span> <span class="n">Channel</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">ChannelError</span> <span class="n">err</span><span class="o">,</span> <span class="n">Channel</span> <span class="n">channel</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">err</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">err</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Subscribed to channel "</span> <span class="o">+</span> <span class="n">channel</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h3 id="client.subscribe(string-channelname,-action2&lt;channelerror,-channel&gt;-callback)">client.subscribe(String channelName, Action2&lt;ChannelError, Channel&gt; callback)</h3>
+
+<p>Subscribe to a  channel called <em>channelName</em>. <em>channel</em> will be a Channel object.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>channelName <code class="prettyprint">java.lang.String</code></li>
+<li>callback (<code class="prettyprint">ChannelError</code>,<code class="prettyprint">Channel</code>)</li>
+</ul>
+
+<h3 id="channel.unsubscribe(action&lt;void&gt;-callback)">channel.unsubscribe(Action&lt;Void&gt; callback)</h3>
+
+<p>Unsubscribe from the current channel.</p>
+
+<h3 id="channel.getsubscribers()">channel.getSubscribers()</h3>
+
+<p>Returns an <code class="prettyprint">java.util.Set&lt;java.lang.String&gt;</code> containing the clientIds of the current subscribers on this channel.</p>
+
+<h2 id="publish">Publish</h2>
+<pre><code class="highlight java"><span class="n">JsonObject</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonObject</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"message"</span><span class="o">,</span> <span class="s">"hello"</span><span class="o">);</span>
+
+<span class="n">channel</span><span class="o">.</span><span class="na">publish</span><span class="o">(</span><span class="n">json</span><span class="o">);</span>
+</code></pre>
+
+<h3 id="channel.publish(jsonobject-content,-action&lt;channelerror&gt;-callback)">channel.publish(JsonObject content, Action&lt;ChannelError&gt; callback)</h3>
+
+<p>Publish <em>content</em> to the channel. <em>content</em> must be an object or array.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>content <code class="prettyprint">io.bigbang.protocol.JsonObject</code> (JSON)</li>
+<li>callback <code class="prettyprint">ChannelError</code> if publish fails or is rejected</li>
+</ul>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight java"><span class="n">channel</span><span class="o">.</span><span class="na">onMessage</span><span class="o">(</span><span class="k">new</span> <span class="n">Action</span><span class="o">&lt;</span><span class="n">ChannelMessage</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">ChannelMessage</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getPayload</span><span class="o">().</span><span class="na">getBytesAsJSON</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h3 id="channel.onmessage(action&lt;channelmessage&gt;-handler)">channel.onMessage(Action&lt;ChannelMessage&gt; handler)</h3>
+
+<p>Fired when a message is received on the channel.</p>
+<pre><code class="highlight java"><span class="n">channel</span><span class="o">.</span><span class="na">onJoin</span><span class="o">(</span><span class="k">new</span> <span class="n">Action</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">String</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"clientId "</span> <span class="o">+</span> <span class="n">result</span> <span class="o">+</span> <span class="s">" joined the channel."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h3 id="channel.onjoin(action&lt;string&gt;-join)">channel.onJoin(Action&lt;String&gt; join)</h3>
+
+<p>Fired when a subscriber joins the channel.</p>
+<pre><code class="highlight java"><span class="n">channel</span><span class="o">.</span><span class="na">onLeave</span><span class="o">(</span><span class="k">new</span> <span class="n">Action</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">String</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"clientId "</span> <span class="o">+</span> <span class="n">result</span> <span class="o">+</span> <span class="s">" left the channel."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h3 id="channel.onleave(action-leave)">channel.onLeave(Action<java.lang.String> leave)</h3>
+
+<p>Fired when a subscriber leaves the channel.</p>
+
+<h1 id="channeldata">ChannelData</h1>
+
+<p>ChannelData objects are used to store the state of your data. ChannelData persist as long as the Channel is active and they are automatically synchronized to all subscribers of the channel.</p>
+
+<h2 id="basics">Basics</h2>
+
+<h3 id="channel.getnamespaces()">channel.getNamespaces()</h3>
+
+<p>Get the current <em>ChannelData</em> namespace names as an <code class="prettyprint">java.util.Set&lt;java.lang.String&gt;</code>.</p>
+
+<p>Returns <code class="prettyprint">ChannelData</code> unless no namespaces exist. Returns null if no namespaces exist.</p>
+<pre><code class="highlight java"><span class="n">ChannelData</span> <span class="n">channelData</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">getChannelData</span><span class="o">();</span>
+</code></pre>
+
+<h3 id="channel.getchanneldata()">channel.getChannelData()</h3>
+
+<p>Returns a <em>ChannelData</em> object for the default namespace.</p>
+<pre><code class="highlight java"><span class="n">ChannelData</span> <span class="n">channelData</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">getChannelData</span><span class="o">(</span><span class="s">"my-namespace"</span><span class="o">);</span>
+</code></pre>
+
+<h3 id="channel.getchanneldata(string-namespace)">channel.getChannelData(String namespace)</h3>
+
+<p>Returns a <em>ChannelData</em> object for the given namespace. Namespaces can be used to organize your channel&rsquo;s data.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>namespace <code class="prettyprint">java.lang.String namespace</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">ChannelData</code></p>
+
+<h3 id="channeldata.get(string-key)">channelData.get(String key)</h3>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">java.lang.String</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">io.bigbang.protocol.JsonElement</code> unless the key doesn&rsquo;t exist. Returns null if the key doesn&rsquo;t exist.</p>
+<pre><code class="highlight java"><span class="n">JsonObject</span> <span class="n">json</span> <span class="o">=</span> <span class="n">channelData</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"myKey"</span><span class="o">,</span> <span class="n">JsonObject</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre>
+
+<h3 id="channeldata.get(java.lang.string-key,-java.lang.class&lt;t&gt;-type)">channelData.get(java.lang.String key, java.lang.Class&lt;T&gt; type)</h3>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">java.lang.String</code></li>
+</ul>
+
+<p>Returns the type <code class="prettyprint">Class&lt;T&gt;</code> unless the key doesn&rsquo;t exist. Returns null if the key doesn&rsquo;t exist.</p>
+
+<h2 id="publish">Publish</h2>
+<pre><code class="highlight java"><span class="n">JsonObject</span> <span class="n">msg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonObject</span><span class="o">();</span>
+<span class="n">msg</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"message"</span><span class="o">,</span> <span class="s">"hello channeldata!"</span><span class="o">);</span>
+<span class="n">channelData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"myKey"</span><span class="o">,</span> <span class="n">msg</span><span class="o">);</span>
+</code></pre>
+
+<h3 id="channeldata.put(string-key,-jsonelement-value)">channelData.put(String key, JsonElement value)</h3>
+
+<p>Set the <em>value</em> for <em>key</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">java.lang.String</code></li>
+<li>value <code class="prettyprint">io.bigbang.protocol.JsonElement</code></li>
+</ul>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight java"><span class="n">channelData</span><span class="o">.</span><span class="na">onAdd</span><span class="o">(</span><span class="k">new</span> <span class="n">Action2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">JsonElement</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">JsonElement</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"added "</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s">" =&gt; "</span> <span class="o">+</span> <span class="n">val</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h3 id="channeldata.onadd(action2&lt;string,-jsonelement&gt;-add)">channelData.onAdd(Action2&lt;String, JsonElement&gt; add)</h3>
+
+<p>Fires when a new key and value is added.</p>
+<pre><code class="highlight java"><span class="n">channelData</span><span class="o">.</span><span class="na">onUpdate</span><span class="o">(</span><span class="k">new</span> <span class="n">Action2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">JsonElement</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">JsonElement</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"updated "</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s">" =&gt; "</span> <span class="o">+</span> <span class="n">val</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h3 id="channeldata.onupdate(action2&lt;string,-jsonelement&gt;-update)">channelData.onUpdate(Action2&lt;String, JsonElement&gt; update)</h3>
+
+<p>Fires when a key&rsquo;s value is updated.</p>
+<pre><code class="highlight java"><span class="n">channelData</span><span class="o">.</span><span class="na">onRemove</span><span class="o">(</span><span class="k">new</span> <span class="n">Action</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"removed "</span> <span class="o">+</span> <span class="n">key</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h3 id="channeldata.onremove(action&lt;string&gt;-remove)">channelData.onRemove(Action&lt;String&gt; remove)</h3>
+
+<p>Fired when a key (and it&rsquo;s value) is removed.</p>
+<pre><code class="highlight java"><span class="n">channelData</span><span class="o">.</span><span class="na">on</span><span class="o">(</span><span class="s">"myKey"</span><span class="o">,</span> <span class="k">new</span> <span class="n">Action2</span><span class="o">&lt;</span><span class="n">JsonElement</span><span class="o">,</span> <span class="n">ChannelData</span><span class="o">.</span><span class="na">Operation</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">JsonElement</span> <span class="n">e</span><span class="o">,</span> <span class="n">ChannelData</span><span class="o">.</span><span class="na">Operation</span> <span class="n">op</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"key operation is "</span> <span class="o">+</span> <span class="n">op</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<h3 id="channeldata.on(string-key,-action2-value)">channelData.on(String key, Action2<JsonElement, String> value)</h3>
+
+<p>Fired when anything happens to key. <em>value</em> will be the new value, except in the case of a remove <em>operation</em> returning null instead. This event is an easy way to monitor a single key.</p>
+
+<h2 id="maintenance">Maintenance</h2>
+<pre><code class="highlight java"><span class="n">channelData</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="s">"myKey"</span><span class="o">);</span>
+</code></pre>
+
+<h3 id="channeldata.remove(java.lang.string-key)">channelData.remove(java.lang.String key)</h3>
+
+<p>Remove the value associated with <em>key</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">java.lang.String</code></li>
+</ul>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="../javascript" data-language-name="javascript">javascript</a>
+                <a href="../java" data-language-name="java">java</a>
+                <a href="../csharp" data-language-name="csharp">csharp</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
