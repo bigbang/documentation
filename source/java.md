@@ -7,7 +7,47 @@ Big Bang lets you create realtime applications in seconds.  It makes event strea
 Installation
 ============
 
-Download the [preview release here](https://github.com/bigbang/bigbang-client-java/releases/download/0.0.1/bigbang-client-java-0.0.1.zip).  Unzip the archive and add the included jars to your application's classpath.
+## Gradle
+
+If you are using Gradle to build your project, add the following custom repository and dependency to your `build.gradle`
+
+```java
+repositories {
+  maven { url "https://dl.bintray.com/bigbang/maven" }
+}
+
+dependencies {
+  compile ("io.bigbang.client:bigbang-client-java:0.0.2")
+}
+```            
+
+## Maven
+
+For Maven builds, add the following custom repository and dependency to your `pom.xml`
+
+```java
+<repositories>
+    <repository>
+      <id>bigbang</id>
+      <name>Big Bang SDK Repository</name>
+      <url>https://dl.bintray.com/bigbang/maven</url>
+    </repository>
+</repositories>
+
+ <dependencies>
+  	<dependency>
+      <groupId>io.bigbang.client</groupId>
+  	  <artifactId>bigbang-client-java</artifactId>
+  	  <version>0.0.2</version>
+  	  <scope>compile</scope>
+  	</dependency>  
+  </dependencies>
+```
+
+
+## Download
+
+Download the [full binary release here](https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.2).  Unzip the archive and add the included jars to your application's classpath.
 
 
 Servers
