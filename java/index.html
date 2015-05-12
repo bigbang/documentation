@@ -57,72 +57,151 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="big-bang-client-sdk">Big Bang Client SDK</h1>
+        <h1 id="big-bang-client-sdk-">Big Bang Client SDK </h1>
 
-<p>Big Bang lets you create realtime applications in seconds.  It makes event streaming and data synchronization a snap!</p>
+<p>The Big Bang Client SDK for Android and Java helps you create realtime applications in seconds!  It makes event streaming and data synchronization a snap!</p>
 
-<h1 id="installation">Installation</h1>
+<h1 id="installation---android">Installation - Android</h1>
+
+<p>The native Android client can be installed with a dependency manager like <a href="https://gradle.org/">Gradle</a> and <a href="https://maven.org">Maven</a>, or obtained via direct download.</p>
 
 <h2 id="gradle">Gradle</h2>
 
 <p>If you are using Gradle to build your project, add the following custom repository and dependency to your <code class="prettyprint">build.gradle</code></p>
-<pre><code class="highlight java"><span class="n">repositories</span> <span class="o">{</span>
-  <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s">"https://dl.bintray.com/bigbang/maven"</span> <span class="o">}</span>
+<pre><code class="highlight groovy"><span class="n">repositories</span> <span class="o">{</span>
+  <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s2">"https://dl.bintray.com/bigbang/maven"</span> <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="n">dependencies</span> <span class="o">{</span>
-  <span class="n">compile</span> <span class="o">(</span><span class="s">"io.bigbang.client:bigbang-client-java:0.0.2"</span><span class="o">)</span>
+    <span class="n">compile</span> <span class="o">(</span><span class="s2">"io.bigbang.client:android:0.0.3"</span><span class="o">)</span>
 <span class="o">}</span>
 </code></pre>
 
 <h2 id="maven">Maven</h2>
 
 <p>For Maven builds, add the following custom repository and dependency to your <code class="prettyprint">pom.xml</code></p>
-<pre><code class="highlight java"><span class="o">&lt;</span><span class="n">repositories</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">repository</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="n">id</span><span class="o">&gt;</span><span class="n">bigbang</span><span class="o">&lt;/</span><span class="n">id</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">Big</span> <span class="n">Bang</span> <span class="n">SDK</span> <span class="n">Repository</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span><span class="nl">https:</span><span class="c1">//dl.bintray.com/bigbang/maven&lt;/url&gt;</span>
-    <span class="o">&lt;/</span><span class="n">repository</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">repositories</span><span class="o">&gt;</span>
+<pre><code class="highlight xml"><span class="nt">&lt;repositories&gt;</span>
+    <span class="nt">&lt;repository&gt;</span>
+      <span class="nt">&lt;id&gt;</span>bigbang<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;name&gt;</span>Big Bang SDK Repository<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;url&gt;</span>https://dl.bintray.com/bigbang/maven<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+<span class="nt">&lt;/repositories&gt;</span>
 
- <span class="o">&lt;</span><span class="n">dependencies</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">io</span><span class="o">.</span><span class="na">bigbang</span><span class="o">.</span><span class="na">client</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">bigbang</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">java</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="n">scope</span><span class="o">&gt;</span><span class="n">compile</span><span class="o">&lt;/</span><span class="n">scope</span><span class="o">&gt;</span>
-    <span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>  
-  <span class="o">&lt;/</span><span class="n">dependencies</span><span class="o">&gt;</span>
+<span class="nt">&lt;dependencies&gt;</span>
+   <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>io.bigbang.client<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>android<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>0.0.3<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>  
+<span class="nt">&lt;/dependencies&gt;</span>
+</code></pre>
+
+<h2 id="android-permissions">Android Permissions</h2>
+<pre><code class="highlight xml"><span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="err">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.INTERNET"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</code></pre>
+
+<p>Big Bang requires internet access. Make sure to add <code class="prettyprint">android.permission.INTERNET</code> permission to your <code class="prettyprint">AndroidManifest.xml</code></p>
+
+<h2 id="download">Download</h2>
+
+<p>Download the <a href="https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.3">Android binary release here</a>.  Unzip the archive and add the included jars to your application&rsquo;s classpath.</p>
+
+<h1 id="installation---java">Installation - Java</h1>
+
+<p>Non-Android Java applications should use the standard Java SDK.</p>
+
+<h2 id="gradle">Gradle</h2>
+
+<p>If you are using Gradle to build your project, add the following custom repository and dependency to your <code class="prettyprint">build.gradle</code></p>
+<pre><code class="highlight groovy"><span class="n">repositories</span> <span class="o">{</span>
+  <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s2">"https://dl.bintray.com/bigbang/maven"</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">compile</span> <span class="o">(</span><span class="s2">"io.bigbang.client:bigbang-client-java:0.0.3"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="maven">Maven</h2>
+
+<p>For Maven builds, add the following custom repository and dependency to your <code class="prettyprint">pom.xml</code></p>
+<pre><code class="highlight xml"><span class="nt">&lt;repositories&gt;</span>
+    <span class="nt">&lt;repository&gt;</span>
+      <span class="nt">&lt;id&gt;</span>bigbang<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;name&gt;</span>Big Bang SDK Repository<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;url&gt;</span>https://dl.bintray.com/bigbang/maven<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+<span class="nt">&lt;/repositories&gt;</span>
+
+<span class="nt">&lt;dependencies&gt;</span>
+   <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>io.bigbang.client<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>bigbang-client-java<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>0.0.3<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>  
+<span class="nt">&lt;/dependencies&gt;</span>
 </code></pre>
 
 <h2 id="download">Download</h2>
 
-<p>Download the <a href="https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.2">full binary release here</a>.  Unzip the archive and add the included jars to your application&rsquo;s classpath.</p>
+<p>Download the <a href="https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.3">full binary release here</a>.  Unzip the archive and add the included jars to your application&rsquo;s classpath.</p>
 
 <h1 id="servers">Servers</h1>
 
-<p>Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use <code class="prettyprint">http://demo.bigbang.io</code> to try things out. When you are ready, you can create your own application at <a href="https://cloud.bigbang.io/">https://cloud.bigbang.io/</a>.</p>
+<p>Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use <code class="prettyprint">http://demo.bigbang.io</code> to try things out. When you are ready, you can create your own application at <a href="https://www.getbigbang.com/#pricing">https://www.getbigbang.com/</a>.</p>
 
 <h1 id="overview">Overview</h1>
 
 <p>You will work with three resources when using Big Bang. First, you will need to manage your connection to our servers. Once you have established a connection, you will subscribe to a Channel. All shared information is scoped to a Channel. You can publish and subscribe one-time messages. If you want to give all subscribers a constantly updated state of your data, you can publish and subscribe ChannelData.</p>
 
 <h1 id="connection">Connection</h1>
-<pre><code class="highlight java"><span class="kd">final</span> <span class="n">BigBangClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultBigBangClient</span><span class="o">();</span>
+
+<p>Connecting your app to Big Bang is easy.</p>
+
+<h2 id="android">Android</h2>
+<pre><code class="highlight java"><span class="kd">final</span> <span class="n">Handler</span> <span class="n">bigBangHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Handler</span><span class="o">(</span><span class="n">getMainLooper</span><span class="o">());</span>
+<span class="n">BigBangClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AndroidBigBangClient</span><span class="o">(</span><span class="k">new</span> <span class="n">Action</span><span class="o">&lt;</span><span class="n">Runnable</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">Runnable</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">bigBangHandler</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
 
 <span class="n">client</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"https://demo.bigbang.io"</span><span class="o">,</span> <span class="k">new</span> <span class="n">Action</span><span class="o">&lt;</span><span class="n">ConnectionError</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">ConnectionError</span> <span class="n">err</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">err</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">err</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">else</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Connected as "</span> <span class="o">+</span> <span class="n">client</span><span class="o">.</span><span class="na">getClientId</span><span class="o">());</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">ConnectionError</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">error</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">"bigbang"</span><span class="o">,</span> <span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">"bigbang"</span><span class="o">,</span> <span class="s">"Connected!"</span><span class="o">);</span>
+        <span class="o">}</span>   
     <span class="o">}</span>
 <span class="o">});</span>
 </code></pre>
 
-<p>Connecting your app to Big Bang is easy.</p>
+<p>The Android SDK uses a special constructor to make sure events from the Big Bang SDK are called in your desired UI thread.  All network activity happens safely in the background.  Here we pass in a <code class="prettyprint">android.os.Handler</code> associated with the main <code class="prettyprint">android.os.Looper</code>.</p>
+
+<h2 id="java">Java</h2>
+<pre><code class="highlight java"><span class="n">BigBangClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultBigBangClient</span><span class="o">();</span>
+
+<span class="n">client</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"https://demo.bigbang.io"</span><span class="o">,</span> <span class="k">new</span> <span class="n">Action</span><span class="o">&lt;</span><span class="n">ConnectionError</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">result</span><span class="o">(</span><span class="n">ConnectionError</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">error</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Connected!"</span><span class="o">);</span>
+        <span class="o">}</span>   
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<p>Plain Java applications should use the default client and constructor.  </p>
 
 <h2 id="basics">Basics</h2>
 
