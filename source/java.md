@@ -1,23 +1,25 @@
-Big Bang Client SDK
+Big Bang Client SDK 
 =================
 
-Big Bang lets you create realtime applications in seconds.  It makes event streaming and data synchronization a snap!
+The Big Bang Client SDK for Android and Java helps you create realtime applications in seconds!  It makes event streaming and data synchronization a snap!
 
 
-Installation
+Installation - Android
 ============
+
+The native Android client can be installed with a dependency manager like [Gradle](https://gradle.org/) and [Maven](https://maven.org), or obtained via direct download.
 
 ## Gradle
 
 If you are using Gradle to build your project, add the following custom repository and dependency to your `build.gradle`
 
-```java
+```groovy
 repositories {
   maven { url "https://dl.bintray.com/bigbang/maven" }
 }
 
 dependencies {
-  compile ("io.bigbang.client:bigbang-client-java:0.0.2")
+    compile ("io.bigbang.client:android:0.0.3")
 }
 ```            
 
@@ -25,7 +27,7 @@ dependencies {
 
 For Maven builds, add the following custom repository and dependency to your `pom.xml`
 
-```java
+```xml
 <repositories>
     <repository>
       <id>bigbang</id>
@@ -34,26 +36,83 @@ For Maven builds, add the following custom repository and dependency to your `po
     </repository>
 </repositories>
 
- <dependencies>
-  	<dependency>
+<dependencies>
+   <dependency>
       <groupId>io.bigbang.client</groupId>
-  	  <artifactId>bigbang-client-java</artifactId>
-  	  <version>0.0.2</version>
+  	  <artifactId>android</artifactId>
+  	  <version>0.0.3</version>
   	  <scope>compile</scope>
   	</dependency>  
-  </dependencies>
+</dependencies>
 ```
+
+## Android Permissions
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>
+```
+Big Bang requires internet access. Make sure to add `android.permission.INTERNET` permission to your `AndroidManifest.xml`
+
+## Download
+
+Download the [Android binary release here](https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.3).  Unzip the archive and add the included jars to your application's classpath.
+
+
+Installation - Java
+============
+
+Non-Android Java applications should use the standard Java SDK.
+
+## Gradle
+
+If you are using Gradle to build your project, add the following custom repository and dependency to your `build.gradle`
+
+```groovy
+repositories {
+  maven { url "https://dl.bintray.com/bigbang/maven" }
+}
+
+dependencies {
+    compile ("io.bigbang.client:bigbang-client-java:0.0.3")
+}
+```            
+
+## Maven
+
+For Maven builds, add the following custom repository and dependency to your `pom.xml`
+
+```xml
+<repositories>
+    <repository>
+      <id>bigbang</id>
+      <name>Big Bang SDK Repository</name>
+      <url>https://dl.bintray.com/bigbang/maven</url>
+    </repository>
+</repositories>
+
+<dependencies>
+   <dependency>
+      <groupId>io.bigbang.client</groupId>
+  	  <artifactId>bigbang-client-java</artifactId>
+  	  <version>0.0.3</version>
+  	  <scope>compile</scope>
+  	</dependency>  
+</dependencies>
+```
+
 
 
 ## Download
 
-Download the [full binary release here](https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.2).  Unzip the archive and add the included jars to your application's classpath.
+Download the [full binary release here](https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.3).  Unzip the archive and add the included jars to your application's classpath.
 
 
 Servers
 =======
 
-Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use `http://demo.bigbang.io` to try things out. When you are ready, you can create your own application at [https://cloud.bigbang.io/](https://cloud.bigbang.io/).
+Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use `http://demo.bigbang.io` to try things out. When you are ready, you can create your own application at [https://www.getbigbang.com/](https://www.getbigbang.com/#pricing).
 
 
 Overview
@@ -63,20 +122,53 @@ You will work with three resources when using Big Bang. First, you will need to 
 
 
 #Connection
+
+Connecting your app to Big Bang is easy.
+
+## Android
+
 ```java
-final BigBangClient client = new DefaultBigBangClient();
+final Handler bigBangHandler = new Handler(getMainLooper());
+BigBangClient client = new AndroidBigBangClient(new Action<Runnable>() {
+    @Override
+    public void result(Runnable result) {
+        bigBangHandler.post(result);
+    }
+});
 
 client.connect("https://demo.bigbang.io", new Action<ConnectionError>() {
     @Override
-    public void result(ConnectionError err) {
-        if (err != null) {
-            System.err.println(err);
-        } else
-            System.out.println("Connected as " + client.getClientId());
+    public void result(ConnectionError error) {
+        if (error != null) {
+            Log.i("bigbang", error.getMessage());
+        } else {
+            Log.i("bigbang", "Connected!");
+        }   
     }
 });
 ```
-Connecting your app to Big Bang is easy.
+
+The Android SDK uses a special constructor to make sure events from the Big Bang SDK are called in your desired UI thread.  All network activity happens safely in the background.  Here we pass in a `android.os.Handler` associated with the main `android.os.Looper`.
+
+## Java
+
+```java
+BigBangClient client = new DefaultBigBangClient();
+
+client.connect("https://demo.bigbang.io", new Action<ConnectionError>() {
+    @Override
+    public void result(ConnectionError error) {
+        if (error != null) {
+            System.out.println(error.getMessage());
+        } else {
+            System.out.println("Connected!");
+        }   
+    }
+});
+```
+
+Plain Java applications should use the default client and constructor.  
+
 ##Basics
 
 ### client.connect(String url, Action&lt;ConnectionError> connectHandler)
