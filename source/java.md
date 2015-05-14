@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    compile ("io.bigbang.client:android:0.0.3")
+    compile ("io.bigbang.client:android:0.0.4")
 }
 ```            
 
@@ -40,7 +40,7 @@ For Maven builds, add the following custom repository and dependency to your `po
    <dependency>
       <groupId>io.bigbang.client</groupId>
   	  <artifactId>android</artifactId>
-  	  <version>0.0.3</version>
+  	  <version>0.0.4</version>
   	  <scope>compile</scope>
   	</dependency>  
 </dependencies>
@@ -57,7 +57,7 @@ Big Bang requires internet access. Make sure to add `android.permission.INTERNET
 
 ## Download
 
-Download the [Android binary release here](https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.3).  Unzip the archive and add the included jars to your application's classpath.
+Download the [Android binary release here](https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.4).  Unzip the archive and add the included jars to your application's classpath.
 
 
 Installation - Java
@@ -75,7 +75,7 @@ repositories {
 }
 
 dependencies {
-    compile ("io.bigbang.client:bigbang-client-java:0.0.3")
+    compile ("io.bigbang.client:bigbang-client-java:0.0.4")
 }
 ```            
 
@@ -96,7 +96,7 @@ For Maven builds, add the following custom repository and dependency to your `po
    <dependency>
       <groupId>io.bigbang.client</groupId>
   	  <artifactId>bigbang-client-java</artifactId>
-  	  <version>0.0.3</version>
+  	  <version>0.0.4</version>
   	  <scope>compile</scope>
   	</dependency>  
 </dependencies>
@@ -106,7 +106,7 @@ For Maven builds, add the following custom repository and dependency to your `po
 
 ## Download
 
-Download the [full binary release here](https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.3).  Unzip the archive and add the included jars to your application's classpath.
+Download the [full binary release here](https://github.com/bigbang/bigbang-client-java/releases/tag/0.0.4).  Unzip the archive and add the included jars to your application's classpath.
 
 
 Servers
