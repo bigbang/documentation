@@ -12,7 +12,7 @@ The Big Bang SDK is provided as a Swift Framework and is compatible with Swift a
 Once you have added Cocoapods to your project, add the BigBang Framework as a dependency.
 
 
-##Podfile
+##Update Podfile
 
 Add the dependency for BigBang in your Podfile
 
@@ -27,6 +27,15 @@ Open up your terminal, switch to your workspace directory, and install.
 
 ```bash
 pod install
+```
+
+##  Import the SDK
+
+Make sure you include the proper import statements anywhere you use the SDK.
+
+```swift
+import BigBang
+import SwiftyJSON
 ```
 
 
@@ -199,41 +208,29 @@ Returns `ChannelData` unless no namespaces exist. Returns null if no namespaces 
 ```swift
 ChannelData channelData = channel.getChannelData();
 ```
-### channel.getChannelData()
+### channel.getChannelData() -> ChannelData
 Returns a *ChannelData* object for the default namespace.
 
 ```swift
 ChannelData channelData = channel.getChannelData("my-namespace");
 ```
-### channel.getChannelData(String namespace)
+### channel.getChannelData(namespace:String) -> ChannelData
 Returns a *ChannelData* object for the given namespace. Namespaces can be used to organize your channel's data.
 
 **Params**
 
-- namespace `java.lang.String namespace`
+- namespace `String`
 
 Returns `ChannelData`
 
 
-### channelData.get(String key)
+### channelData.get(key:String) -> JSON?
 
 **Params**
 
-- key `java.lang.String`
+- key `String`
 
-Returns `io.bigbang.protocol.JsonElement` unless the key doesn't exist. Returns null if the key doesn't exist.
-
-
-```swift
-JsonObject json = channelData.get("myKey", JsonObject.class);
-```
-### channelData.get(java.lang.String key, java.lang.Class&lt;T> type)
-
-**Params**
-
-- key `java.lang.String`
-
-Returns the type `Class<T>` unless the key doesn't exist. Returns null if the key doesn't exist.
+Returns `JSON` unless the key doesn't exist. Returns null if the key doesn't exist.
 
 
 ##Publish
@@ -255,48 +252,36 @@ Set the *value* for *key*.
 ##Subscribe
 
 ```swift
-channelData.onAdd(new Action2<String, JsonElement>() {
-    @Override
-    public void result(String key, JsonElement val) {
-        System.out.println("added " + key + " => " + val);
-    }
-});
+channelData.onAdd({ (key,val) in
+    println("added " + key + " => " + val)
+})
 ```
-### channelData.onAdd(Action2&lt;String, JsonElement> add)
+### channelData.onAdd( callback:AddCallback ) -> Void
 Fires when a new key and value is added.
 
 ```swift
-channelData.onUpdate(new Action2<String, JsonElement>() {
-    @Override
-    public void result(String key, JsonElement val) {
-        System.out.println("updated " + key + " => " + val);
-    }
-});
+channelData.onUpdate({ (key,val) in
+    println("updated " + key + " => " + val)
+})
 ```
-### channelData.onUpdate(Action2&lt;String, JsonElement> update)
+### channelData.onUpdate( callback:UpdateCallback ) -> Void
 Fires when a key's value is updated.
 
 ```swift
-channelData.onRemove(new Action<String>() {
-    @Override
-    public void result(String key) {
-        System.out.println("removed " + key);
-    }
-});
+channelData.onRemove({ (key) in
+    println("removed " + key)
+})
 ```
-### channelData.onRemove(Action&lt;String> remove)
+### channelData.onRemove( callback:RemoveCallback) -> Void
 Fired when a key (and it's value) is removed.
 
 
 ```swift
-channelData.on("myKey", new Action2<JsonElement, ChannelData.Operation>() {
-    @Override
-    public void result(JsonElement e, ChannelData.Operation op) {
-        System.out.println("key operation is " + op);
-    }
-});
+channelData.on("myKey", callback: { (json, op) -> Void in
+    println("key operation is " +  op )
+})    
 ```
-### channelData.on(String key, Action2<JsonElement, String> value)
+### channelData.on( key:String, callback:OperationCallback) -> Void
 Fired when anything happens to key. *value* will be the new value, except in the case of a remove *operation* returning null instead. This event is an easy way to monitor a single key.
 
 
@@ -305,10 +290,10 @@ Fired when anything happens to key. *value* will be the new value, except in the
 ```swift
 channelData.remove("myKey");
 ```
-### channelData.remove(java.lang.String key)
+### channelData.remove(key:String) -> Void
 Remove the value associated with *key*.
 
 **Params**
 
-- key `java.lang.String`
+- key `String`
 
