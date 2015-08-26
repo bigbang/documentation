@@ -1,0 +1,364 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Big Bang Client SDK</title>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <link href="../stylesheets/screen-8ba76c86.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print-4f1abb79.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="../javascripts/all-ac9e813e.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          language = "ios"
+          localStorage.setItem("language", language);
+          activateLanguage(language);
+        });
+      </script>
+  </head>
+
+  <body class="ios ios_index">
+    <nav>
+  <div class="logo">
+  <img src="../images/bigbang-342a2a1f.png" />
+  <div>Big Bang</div>
+  </div>
+  <ul class="links">
+    <li><a href="#">Documentation</a></li>
+    <li><a href="#">Support</a></li>
+  </ul>
+  <div class="pull-right">
+    <a href="#">Log In</a>
+    <a href="#">Sign Up</a>
+  </div>
+</nav>
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar-6c2f9478.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="../javascript" data-language-name="javascript">javascript</a>
+              <a href="../java" data-language-name="java">java</a>
+              <a href="../csharp" data-language-name="csharp">csharp</a>
+              <a href="../ios" data-language-name="ios">ios</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="big-bang-client-sdk">Big Bang Client SDK</h1>
+
+<p>The Big Bang Client SDK for iOS and OSX helps you create realtime applications in seconds!  It makes event streaming and data synchronization a snap!</p>
+
+<h1 id="installation---xcode">Installation - XCode</h1>
+
+<p>The Big Bang SDK is provided as a Swift Framework and is compatible with Swift and Objective-C projects for iOS and OSX.  The easiest way to get started is by using <a href="https://cocoapods.org/">Cocoapods</a> to help manage your dependencies.</p>
+
+<p>Once you have added Cocoapods to your project, add the BigBang Framework as a dependency.</p>
+
+<h2 id="update-podfile">Update Podfile</h2>
+
+<p>Add the dependency for BigBang in your Podfile</p>
+<pre><code class="highlight plaintext">target 'MyApp' do
+  pod 'BigBang', '~&gt; 0.0.1'
+end
+</code></pre>
+
+<h2 id="install-the-depndencies">Install the depndencies</h2>
+
+<p>Open up your terminal, switch to your workspace directory, and install.</p>
+<pre><code class="highlight shell">pod install
+</code></pre>
+
+<h2 id="import-the-sdk">Import the SDK</h2>
+
+<p>Make sure you include the proper import statements anywhere you use the SDK.</p>
+<pre><code class="highlight swift"><span class="kd">import</span> <span class="kt">BigBang</span>
+<span class="kd">import</span> <span class="kt">SwiftyJSON</span>
+</code></pre>
+
+<h1 id="servers">Servers</h1>
+
+<p>Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use <code class="prettyprint">http://demo.bigbang.io</code> to try things out. When you are ready, you can create your own application at <a href="https://www.getbigbang.com/#pricing">https://www.getbigbang.com/</a>.</p>
+
+<h1 id="overview">Overview</h1>
+
+<p>You will work with three resources when using Big Bang. First, you will need to manage your connection to our servers. Once you have established a connection, you will subscribe to a Channel. All shared information is scoped to a Channel. You can publish and subscribe one-time messages. If you want to give all subscribers a constantly updated state of your data, you can publish and subscribe ChannelData.</p>
+
+<h1 id="connection">Connection</h1>
+
+<p>Connecting your app to Big Bang is easy.</p>
+
+<h2 id="basics">Basics</h2>
+<pre><code class="highlight swift"><span class="k">var</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">DefaultBigBangClient</span><span class="p">(</span><span class="nv">appURL</span><span class="p">:</span> <span class="s">"https://demo.bigbang.io"</span><span class="p">)</span>
+<span class="n">client</span><span class="p">?</span><span class="o">.</span><span class="nf">connect</span><span class="p">({</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">connectErr</span> <span class="o">=</span> <span class="n">err</span>  <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"Connection error: "</span> <span class="o">+</span> <span class="n">connectErr</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"Connected!"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+
+<h3 id="client.connect(callback:connectcallback)">client.connect(callback:ConnectCallback)</h3>
+
+<p>Connect to your Big Bang application.</p>
+
+<p><strong>Params</strong>
+- callback (<code class="prettyprint">Error</code>)</p>
+
+<h3 id="client.disconnect()">client.disconnect()</h3>
+
+<p>Disconnect from the server.</p>
+
+<h3 id="client.getclientid()--&gt;-string">client.getClientId() -&gt; String</h3>
+
+<p>Your unique identifier for this session. This identifies you to the server and to other users.</p>
+
+<p>Returns <code class="prettyprint">String</code> clientId</p>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight swift"><span class="n">client</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span> <span class="n">channelName</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:{</span> <span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">channel</span><span class="p">)</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">subscribeErr</span> <span class="o">=</span> <span class="n">err</span>  <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"Subscribe error: "</span> <span class="o">+</span> <span class="n">subscribeErr</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"Subscribed to "</span> <span class="o">+</span> <span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+
+<h2 id="disconnect">Disconnect</h2>
+<pre><code class="highlight swift"><span class="n">client</span><span class="o">.</span><span class="nf">disconnected</span><span class="p">({()</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Disconnected!"</span><span class="p">)</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="disconnected(-callback:-disconnectcallback-)--&gt;-void">disconnected( callback: DisconnectCallback ) -&gt; Void</h3>
+
+<p>Fired when the client has been disconnected, either from calling disconnect() or for reasons beyond your control.</p>
+
+<h1 id="channel">Channel</h1>
+
+<p>Group together multiple clients in a channel to share information. Channels are publish/subscribe. You can subscribe to a Channel to get any messages that are published to it. You can publish a message to send it to all subscribers.</p>
+
+<h2 id="basics">Basics</h2>
+<pre><code class="highlight swift"><span class="k">var</span> <span class="nv">channel</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nf">getChannel</span><span class="p">(</span><span class="s">"example-channel"</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="client.getchannel(-name:string-)--&gt;-channel?">client.getChannel( name:String ) -&gt; Channel?</h3>
+
+<p>Get a reference to the Channel object for the subscribed channel called <em>name</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>name <code class="prettyprint">String</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">Channel</code></p>
+<pre><code class="highlight swift"><span class="n">client</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="s">"test_channel"</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">cerr</span><span class="p">,</span> <span class="n">channel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">subscribeErr</span>  <span class="o">=</span> <span class="n">cerr</span>  <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"Subscribe error: "</span> <span class="o">+</span> <span class="n">subscribeErr</span> <span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"Subscribed to "</span> <span class="o">+</span> <span class="n">channel</span><span class="o">!.</span><span class="n">name</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+
+<h3 id="client.subscribe(-name:-string,-callback:-subscribecallback)--&gt;-void">client.subscribe( name: String, callback: SubscribeCallback) -&gt; Void</h3>
+
+<p>Subscribe to a  channel called <em>name</em>. <em>channel</em> will be a Channel object.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>name <code class="prettyprint">String</code></li>
+<li>callback (<code class="prettyprint">ChannelError</code>,<code class="prettyprint">Channel</code>)</li>
+</ul>
+
+<h3 id="channel.unsubscribe(action&lt;void&gt;-callback)">channel.unsubscribe(Action&lt;Void&gt; callback)</h3>
+
+<p>Unsubscribe from the current channel.</p>
+
+<h3 id="channel.getsubscribers()--&gt;-[string]">channel.getSubscribers() -&gt; [String]</h3>
+
+<p>Returns a <code class="prettyprint">[String]</code> containing the clientIds of the current subscribers on this channel.</p>
+
+<h2 id="publish">Publish</h2>
+<pre><code class="highlight swift"><span class="k">var</span> <span class="nv">json</span> <span class="o">=</span> <span class="kt">JSON</span><span class="o">.</span><span class="nf">newJSONObject</span><span class="p">()</span>
+<span class="n">json</span><span class="p">[</span><span class="s">"message"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"hello"</span>
+
+<span class="n">channel</span><span class="o">!.</span><span class="nf">publish</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+</code></pre>
+
+<h3 id="channel.publish(message:json)--&gt;void">channel.publish(message:JSON) -&gt;Void</h3>
+
+<p>Publish <em>content</em> to the channel. <em>content</em> must be a JSON object or array.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>content <code class="prettyprint">JSON</code> (JSON)</li>
+</ul>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight swift"><span class="n">channel</span><span class="o">!.</span><span class="nf">onMessage</span><span class="p">({</span> <span class="p">(</span><span class="n">channelMessage</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">channelMessage</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="nf">getBytesAsJson</span><span class="p">())</span>
+<span class="p">})</span>
+</code></pre>
+
+<h3 id="channel.onmessage(-callback:-messagecallback)--&gt;void">channel.onMessage( callback: MessageCallback) -&gt;Void</h3>
+
+<p>Fired when a message is received on the channel.</p>
+<pre><code class="highlight swift"><span class="n">channel</span><span class="o">!.</span><span class="nf">onJoin</span><span class="p">({(</span><span class="n">joined</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"clientId "</span> <span class="o">+</span> <span class="n">joined</span> <span class="o">+</span> <span class="s">" joined the channel."</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+
+<h3 id="channel.onjoin(-callback:-presencecallback)--&gt;-void">channel.onJoin( callback: PresenceCallback) -&gt; Void</h3>
+
+<p>Fired when a subscriber joins the channel.</p>
+<pre><code class="highlight swift"><span class="n">channel</span><span class="o">!.</span><span class="nf">onLeave</span><span class="p">({(</span><span class="k">left</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"clientId "</span> <span class="o">+</span> <span class="k">left</span> <span class="o">+</span> <span class="s">" left the channel."</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+
+<h3 id="channel.onleave(-callback:-presencecallback-)--&gt;-void">channel.onLeave( callback: PresenceCallback ) -&gt; Void</h3>
+
+<p>Fired when a subscriber leaves the channel.</p>
+
+<h1 id="channeldata">ChannelData</h1>
+
+<p>ChannelData objects are used to store the state of your data. ChannelData persist as long as the Channel is active and they are automatically synchronized to all subscribers of the channel.</p>
+
+<h2 id="basics">Basics</h2>
+
+<h3 id="channel.getnamespaces()">channel.getNamespaces()</h3>
+
+<p>Get the current <em>ChannelData</em> namespace names as an <code class="prettyprint">java.util.Set&lt;java.lang.String&gt;</code>.</p>
+
+<p>Returns <code class="prettyprint">ChannelData</code> unless no namespaces exist. Returns null if no namespaces exist.</p>
+<pre><code class="highlight swift"><span class="kt">ChannelData</span> <span class="n">channelData</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="nf">getChannelData</span><span class="p">();</span>
+</code></pre>
+
+<h3 id="channel.getchanneldata()--&gt;-channeldata">channel.getChannelData() -&gt; ChannelData</h3>
+
+<p>Returns a <em>ChannelData</em> object for the default namespace.</p>
+<pre><code class="highlight swift"><span class="kt">ChannelData</span> <span class="n">channelData</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="nf">getChannelData</span><span class="p">(</span><span class="s">"my-namespace"</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="channel.getchanneldata(namespace:string)--&gt;-channeldata">channel.getChannelData(namespace:String) -&gt; ChannelData</h3>
+
+<p>Returns a <em>ChannelData</em> object for the given namespace. Namespaces can be used to organize your channel&rsquo;s data.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>namespace <code class="prettyprint">String</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">ChannelData</code></p>
+
+<h3 id="channeldata.get(key:string)--&gt;-json?">channelData.get(key:String) -&gt; JSON?</h3>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">String</code></li>
+</ul>
+
+<p>Returns <code class="prettyprint">JSON</code> unless the key doesn&rsquo;t exist. Returns null if the key doesn&rsquo;t exist.</p>
+
+<h2 id="publish">Publish</h2>
+<pre><code class="highlight swift"><span class="kt">JsonObject</span> <span class="n">msg</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">JsonObject</span><span class="p">();</span>
+<span class="n">msg</span><span class="o">.</span><span class="nf">putString</span><span class="p">(</span><span class="s">"message"</span><span class="p">,</span> <span class="s">"hello channeldata!"</span><span class="p">);</span>
+<span class="n">channelData</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="s">"myKey"</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="channeldata.put(string-key,-jsonelement-value)">channelData.put(String key, JsonElement value)</h3>
+
+<p>Set the <em>value</em> for <em>key</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">java.lang.String</code></li>
+<li>value <code class="prettyprint">io.bigbang.protocol.JsonElement</code></li>
+</ul>
+
+<h2 id="subscribe">Subscribe</h2>
+<pre><code class="highlight swift"><span class="n">channelData</span><span class="o">.</span><span class="nf">onAdd</span><span class="p">({</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"added "</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s">" =&gt; "</span> <span class="o">+</span> <span class="n">val</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+
+<h3 id="channeldata.onadd(-callback:addcallback-)--&gt;-void">channelData.onAdd( callback:AddCallback ) -&gt; Void</h3>
+
+<p>Fires when a new key and value is added.</p>
+<pre><code class="highlight swift"><span class="n">channelData</span><span class="o">.</span><span class="nf">onUpdate</span><span class="p">({</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"updated "</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s">" =&gt; "</span> <span class="o">+</span> <span class="n">val</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+
+<h3 id="channeldata.onupdate(-callback:updatecallback-)--&gt;-void">channelData.onUpdate( callback:UpdateCallback ) -&gt; Void</h3>
+
+<p>Fires when a key&rsquo;s value is updated.</p>
+<pre><code class="highlight swift"><span class="n">channelData</span><span class="o">.</span><span class="nf">onRemove</span><span class="p">({</span> <span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"removed "</span> <span class="o">+</span> <span class="n">key</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+
+<h3 id="channeldata.onremove(-callback:removecallback)--&gt;-void">channelData.onRemove( callback:RemoveCallback) -&gt; Void</h3>
+
+<p>Fired when a key (and it&rsquo;s value) is removed.</p>
+<pre><code class="highlight swift"><span class="n">channelData</span><span class="o">.</span><span class="nf">on</span><span class="p">(</span><span class="s">"myKey"</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"key operation is "</span> <span class="o">+</span>  <span class="n">op</span> <span class="p">)</span>
+<span class="p">})</span>    
+</code></pre>
+
+<h3 id="channeldata.on(-key:string,-callback:operationcallback)--&gt;-void">channelData.on( key:String, callback:OperationCallback) -&gt; Void</h3>
+
+<p>Fired when anything happens to key. <em>value</em> will be the new value, except in the case of a remove <em>operation</em> returning null instead. This event is an easy way to monitor a single key.</p>
+
+<h2 id="maintenance">Maintenance</h2>
+<pre><code class="highlight swift"><span class="n">channelData</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="s">"myKey"</span><span class="p">);</span>
+</code></pre>
+
+<h3 id="channeldata.remove(key:string)--&gt;-void">channelData.remove(key:String) -&gt; Void</h3>
+
+<p>Remove the value associated with <em>key</em>.</p>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li>key <code class="prettyprint">String</code></li>
+</ul>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="../javascript" data-language-name="javascript">javascript</a>
+                <a href="../java" data-language-name="java">java</a>
+                <a href="../csharp" data-language-name="csharp">csharp</a>
+                <a href="../ios" data-language-name="ios">ios</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
