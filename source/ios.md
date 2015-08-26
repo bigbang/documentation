@@ -91,55 +91,47 @@ client.subscribe( channelName, callback:{ (err, channel) in
 ##Disconnect
 
 ```swift
-client.disconnected(new Action<Void>() {
-    @Override
-    public void result(Void result) {
-       System.out.println("Client disconnected");
-    }
+client.disconnected({() -> Void in
+    println("Disconnected!")
 });
 ```
-### client.disconnected(Action&lt;Void> callback)
-
-
+### disconnected( callback: DisconnectCallback ) -> Void
 
 
 Fired when the client has been disconnected, either from calling disconnect() or for reasons beyond your control.
-
-
 
 #Channel
 Group together multiple clients in a channel to share information. Channels are publish/subscribe. You can subscribe to a Channel to get any messages that are published to it. You can publish a message to send it to all subscribers.
 ##Basics
 ```swift
-Channel channel = client.getChannel("example-channel");
+var channel = client.getChannel("example-channel");
 ```
-### client.getChannel(String channelName)
-Get a reference to the Channel object for the subscribed channel called *channelName*.
+### client.getChannel( name:String ) -> Channel?
+Get a reference to the Channel object for the subscribed channel called *name*.
 
 **Params**
 
-- channelName `java.lang.String`
+- name `String`
 
 Returns `Channel`
 
 ```swift
-client.subscribe("example-channel", new Action2<ChannelError, Channel>() {
-    @Override
-    public void result(ChannelError err, Channel channel) {
-      if (err != null) {
-            System.err.println(err);
-        } else {
-            System.out.println("Subscribed to channel " + channel.getName());
-      }
+client.subscribe("test_channel", callback: { (cerr, channel) -> Void in
+    
+    if let subscribeErr  = cerr  {
+        println("Subscribe error: " + subscribeErr )
     }
-});
+    else {
+        println("Subscribed to " + channel!.name );
+    }
+})
 ```
-### client.subscribe(String channelName, Action2&lt;ChannelError, Channel> callback)
-Subscribe to a  channel called *channelName*. *channel* will be a Channel object.
+### client.subscribe( name: String, callback: SubscribeCallback) -> Void
+Subscribe to a  channel called *name*. *channel* will be a Channel object.
 
 **Params**
 
-- channelName `java.lang.String`
+- name `String`
 - callback (`ChannelError`,`Channel`)
 
 
@@ -147,60 +139,50 @@ Subscribe to a  channel called *channelName*. *channel* will be a Channel object
 Unsubscribe from the current channel.
 
 
-### channel.getSubscribers()
-Returns an `java.util.Set<java.lang.String>` containing the clientIds of the current subscribers on this channel.
+### channel.getSubscribers() -> [String]
+Returns a `[String]` containing the clientIds of the current subscribers on this channel.
 
 
 ##Publish
 ```swift
-JsonObject json = new JsonObject();
-json.putString("message", "hello");
+var json = JSON.newJSONObject()
+json["message"] = "hello"
 
-channel.publish(json);
+channel!.publish(json)
 ```
 
-### channel.publish(JsonObject content, Action&lt;ChannelError> callback)
-Publish *content* to the channel. *content* must be an object or array.
+### channel.publish(message:JSON) ->Void
+Publish *content* to the channel. *content* must be a JSON object or array.
 
 **Params**
 
-- content `io.bigbang.protocol.JsonObject` (JSON)
-- callback `ChannelError` if publish fails or is rejected
+- content `JSON` (JSON)
 
 
 ##Subscribe
 ```swift
-channel.onMessage(new Action<ChannelMessage>() {
-    @Override
-    public void result(ChannelMessage msg) {
-        System.out.println(msg.getPayload().getBytesAsJSON());
-    }
-});
+channel!.onMessage({ (channelMessage) in
+    println(channelMessage.payload.getBytesAsJson())
+})
 ```
-### channel.onMessage(Action&lt;ChannelMessage> handler)
+### channel.onMessage( callback: MessageCallback) ->Void
 Fired when a message is received on the channel.
 
 ```swift
-channel.onJoin(new Action<String>() {
-    @Override
-    public void result(String result) {
-        System.out.println("clientId " + result + " joined the channel.");
-    }
-});
+channel!.onJoin({(joined) in
+    println("clientId " + joined + " joined the channel.")
+})
 ```
-###  channel.onJoin(Action&lt;String> join)
+###  channel.onJoin( callback: PresenceCallback) -> Void
 Fired when a subscriber joins the channel.
 
 
 ```swift
-channel.onLeave(new Action<String>() {
-    @Override
-    public void result(String result) {
-        System.out.println("clientId " + result + " left the channel.");
-    }
-});
+channel!.onLeave({(left) in
+    println("clientId " + left + " left the channel.")
+})
 ```
-### channel.onLeave(Action<java.lang.String> leave)
+### channel.onLeave( callback: PresenceCallback ) -> Void
 Fired when a subscriber leaves the channel.
 
 
