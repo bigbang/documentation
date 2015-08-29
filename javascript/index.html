@@ -72,7 +72,7 @@
 
 <h1 id="servers">Servers</h1>
 
-<p>Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use <code class="prettyprint">http://demo.bigbang.io</code> to try things out. When you are ready, you can create your own application at <a href="https://cloud.bigbang.io/">https://cloud.bigbang.io/</a>.</p>
+<p>Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use <code class="prettyprint">http://demo.bigbang.io</code> to try things out. When you are ready, you can create your own application at <a href="http://getbigbang.com/#pricing">https://www.getbigbang.com/</a>.</p>
 
 <h1 id="overview">Overview</h1>
 
@@ -83,8 +83,8 @@
 <p>Connecting your app to Big Bang is easy.</p>
 
 <h2 id="basics">Basics</h2>
-<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigBang</span><span class="p">.</span><span class="nx">Client</span><span class="p">();</span>
-<span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">'https://demo.bigbang.io'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigBang</span><span class="p">.</span><span class="nx">Client</span><span class="p">(</span><span class="s1">'https://demo.bigbang.io'</span><span class="p">);</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
@@ -92,7 +92,7 @@
 <span class="p">});</span>
 </code></pre>
 
-<h3 id="client.connect(url,-function(err))">client.connect(url, function(err))</h3>
+<h3 id="client.connect(function(err))">client.connect(function(err))</h3>
 
 <p>Connect to a Big Bang application at <em>url</em>.</p>
 
