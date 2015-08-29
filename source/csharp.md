@@ -7,16 +7,12 @@ Big Bang lets you create realtime applications in seconds.  It makes event strea
 Installation
 ============
 
-    ##TODO direct download link
-or
-
-    ##TODO nuget
-
+Contact us for beta download.
 
 Servers
 =======
 
-Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use `http://demo.bigbang.io` to try things out. When you are ready, you can create your own application at [https://cloud.bigbang.io/](https://cloud.bigbang.io/).
+Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use `http://demo.bigbang.io` to try things out. When you are ready, you can create your own application at [https://www.getbigbang.com/](http://getbigbang.com/#pricing).
 
 
 Overview

@@ -16,7 +16,7 @@ or
 Servers
 =======
 
-Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use `http://demo.bigbang.io` to try things out. When you are ready, you can create your own application at [https://cloud.bigbang.io/](https://cloud.bigbang.io/).
+Big Bang manages your realtime infrastructure for you. Simply connect your clients and apps to your Big Bang URL. You can use `http://demo.bigbang.io` to try things out. When you are ready, you can create your own application at [https://www.getbigbang.com/](http://getbigbang.com/#pricing).
 
 
 Overview
@@ -29,15 +29,15 @@ You will work with three resources when using Big Bang. First, you will need to 
 Connecting your app to Big Bang is easy.
 ##Basics
 ```javascript
-var client = new BigBang.Client();
-client.connect('https://demo.bigbang.io', function (err) {
+var client = new BigBang.Client('https://demo.bigbang.io');
+client.connect(function (err) {
     if (err) {
         return;
     }
     console.log('Connected as ' + client.getClientId());
 });
 ```
-### client.connect(url, function(err))
+### client.connect(function(err))
 Connect to a Big Bang application at *url*.
 
 **Params**
